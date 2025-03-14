@@ -7,13 +7,13 @@ import gradio as gr
 MODEL_DIR = "./models"
 os.makedirs(MODEL_DIR, exist_ok=True)
 
-# Define available models, including the new customer support model
+# Define available models, including the new customer support models
 MODEL_OPTIONS = {
     "Phi-4-Mini-Instruct": "microsoft/Phi-4-mini-instruct",
     "Qwen2.5-0.5B-Instruct": "Qwen/Qwen2.5-0.5B-Instruct",
     "LLaMA-3.2-1B-Instruct": "meta-llama/Llama-3.2-1B-Instruct",
-    "Customer-Support-Instruct-1B": "dheerajdasari/Customer-support-instruct-1B",
-    "LLaMA-3.2-3B-Customer-Support (Pretrained)": "kingabzpro/Llama-3.2-3b-it-customer-support",  # ✅ New Model Added
+    "LLaMA-3.2-3B-Customer-Support (Pretrained)": "kingabzpro/Llama-3.2-3b-it-customer-support",
+    "LLaMA-3.2-1B-Customer-Support-4Bit": "dheerajdasari/customer-support-1b-4bit",  # ✅ New 1B 4-bit model added
 }
 
 # Store the current model to manage memory
@@ -72,7 +72,7 @@ def chat(user_input, model_name, instructions, max_tokens, temperature):
 with gr.Blocks() as demo:
     gr.Markdown("# Conversational AI Chatbot")
 
-    model_dropdown = gr.Dropdown(label="Select Model", choices=list(MODEL_OPTIONS.keys()), value="LLaMA-3.2-3B-Customer-Support (Pretrained)")  # ✅ Default to new customer support model
+    model_dropdown = gr.Dropdown(label="Select Model", choices=list(MODEL_OPTIONS.keys()), value="LLaMA-3.2-1B-Customer-Support-4Bit")  # ✅ Default to new 4-bit model
     load_button = gr.Button("Load Model")
 
     instruction_box = gr.Textbox(label="Instructions for AI (e.g., 'Be brief', 'Use bullet points')")

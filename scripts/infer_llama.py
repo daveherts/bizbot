@@ -7,13 +7,13 @@ import gradio as gr
 MODEL_DIR = "./models"
 os.makedirs(MODEL_DIR, exist_ok=True)
 
-# Define available models, including your fine-tuned model
+# Define available models, including the new customer support model
 MODEL_OPTIONS = {
     "Phi-4-Mini-Instruct": "microsoft/Phi-4-mini-instruct",
     "Qwen2.5-0.5B-Instruct": "Qwen/Qwen2.5-0.5B-Instruct",
     "LLaMA-3.2-1B-Instruct": "meta-llama/Llama-3.2-1B-Instruct",
     "Customer-Support-Instruct-1B": "dheerajdasari/Customer-support-instruct-1B",
-    "Fine-Tuned Customer Support Model": "./models/llama-finetuned"  # ✅ Added your fine-tuned model
+    "LLaMA-3.2-3B-Customer-Support (Pretrained)": "kingabzpro/Llama-3.2-3b-it-customer-support",  # ✅ New Model Added
 }
 
 # Store the current model to manage memory
@@ -51,19 +51,19 @@ def chat(user_input, model_name, instructions, max_tokens, temperature):
     if current_model is None or current_tokenizer is None:
         return "No model loaded. Please select a model first."
 
-    # Add user instructions if provided
-    formatted_input = f"System: You are an AI assistant. Follow user instructions carefully.\nInstructions: {instructions}\nUser: {user_input}\nAssistant:"
-    
+    # ✅ Improved input formatting for better response generation
+    formatted_input = f"{instructions}\nUser: {user_input}\nAssistant:"
+
     inputs = current_tokenizer(formatted_input, return_tensors="pt").to("cuda")
     
     with torch.no_grad():
         outputs = current_model.generate(
-            **inputs, max_new_tokens=max_tokens, temperature=temperature
+            **inputs, max_new_tokens=max_tokens, temperature=temperature, pad_token_id=current_tokenizer.eos_token_id
         )
 
     response = current_tokenizer.decode(outputs[0], skip_special_tokens=True)
     
-    # Clean up unnecessary system/user parts
+    # ✅ Clean up unnecessary system/user parts
     response = response.replace("User:", "").replace("Assistant:", "").strip()
     
     return response
@@ -72,7 +72,7 @@ def chat(user_input, model_name, instructions, max_tokens, temperature):
 with gr.Blocks() as demo:
     gr.Markdown("# Conversational AI Chatbot")
 
-    model_dropdown = gr.Dropdown(label="Select Model", choices=list(MODEL_OPTIONS.keys()), value="Fine-Tuned Customer Support Model")  # ✅ Default to fine-tuned model
+    model_dropdown = gr.Dropdown(label="Select Model", choices=list(MODEL_OPTIONS.keys()), value="LLaMA-3.2-3B-Customer-Support (Pretrained)")  # ✅ Default to new customer support model
     load_button = gr.Button("Load Model")
 
     instruction_box = gr.Textbox(label="Instructions for AI (e.g., 'Be brief', 'Use bullet points')")
@@ -80,8 +80,8 @@ with gr.Blocks() as demo:
     
     response_box = gr.Textbox(label="Chatbot's Response", interactive=False)
     
-    max_tokens_slider = gr.Slider(label="Response Length (Max Tokens)", minimum=50, maximum=500, value=150)
-    temperature_slider = gr.Slider(label="Creativity (Temperature)", minimum=0.1, maximum=1.5, value=0.7)
+    max_tokens_slider = gr.Slider(label="Response Length (Max Tokens)", minimum=50, maximum=250, value=100)  # ✅ Reduced max tokens
+    temperature_slider = gr.Slider(label="Creativity (Temperature)", minimum=0.1, maximum=1.0, value=0.3)  # ✅ Lowered temperature for structured responses
     
     submit_button = gr.Button("Submit")
     clear_chat_button = gr.Button("Clear Chat")

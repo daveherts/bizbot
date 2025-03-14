@@ -1,6 +1,6 @@
 import os
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, Trainer
+from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, Trainer, BitsAndBytesConfig
 from datasets import load_dataset
 from peft import get_peft_model, LoraConfig, TaskType
 import bitsandbytes as bnb
@@ -17,9 +17,18 @@ MODEL_NAME = "meta-llama/Llama-3.2-1B-Instruct"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, cache_dir=MODEL_DIR)
 
+# 🔥 Fix for LLaMA: Manually set padding token
+tokenizer.pad_token = tokenizer.eos_token
+
+# ✅ Use BitsAndBytesConfig to Speed Up Training
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_compute_dtype=torch.float16,  # ✅ Force computations in FP16 for speed
+)
+
 model = AutoModelForCausalLM.from_pretrained(
     MODEL_NAME,
-    load_in_4bit=True,  # Load in 4-bit precision (QLoRA)
+    quantization_config=bnb_config,
     device_map="auto",
     cache_dir=MODEL_DIR,
 )
@@ -27,7 +36,7 @@ model = AutoModelForCausalLM.from_pretrained(
 # LoRA Configuration (Lightweight Fine-tuning)
 lora_config = LoraConfig(
     task_type=TaskType.CAUSAL_LM,
-    r=8,  # Rank of LoRA
+    r=8,  # LoRA rank
     lora_alpha=16,
     lora_dropout=0.1,
 )
@@ -35,25 +44,32 @@ lora_config = LoraConfig(
 # Apply LoRA to model
 model = get_peft_model(model, lora_config)
 
-# Preprocessing: Tokenize dataset
+# ✅ FIX: Ensure Labels Are Set for Loss Computation
 def tokenize_function(examples):
-    return tokenizer(examples["instruction"], padding="max_length", truncation=True)
+    inputs = tokenizer(
+        examples["instruction"], 
+        padding="max_length",  
+        truncation=True,  
+        max_length=512  
+    )
+    inputs["labels"] = inputs["input_ids"].copy()  # ✅ Add labels for loss computation
+    return inputs
 
 tokenized_datasets = dataset.map(tokenize_function, batched=True)
 
-# Training Arguments
+# ✅ Training Arguments (Optimized for A3000 6GB)
 training_args = TrainingArguments(
     output_dir="./models/llama-finetuned",
-    per_device_train_batch_size=4,  # Small batch size due to 6GB VRAM
-    gradient_accumulation_steps=4,  # Effective batch size = 4 * 4 = 16
-    num_train_epochs=3,  # Adjust based on performance
+    per_device_train_batch_size=2,  # ⬇ Reduce batch size (previously 4)
+    gradient_accumulation_steps=2,  # ⬇ Reduce accumulation steps (previously 4)
+    num_train_epochs=3,  
     save_steps=500,
     save_total_limit=2,
     logging_dir="./logs",
-    evaluation_strategy="epoch",
-    fp16=True,  # Use mixed precision for speed
-    optim="adamw_bnb_8bit",  # Memory-efficient optimizer
-    report_to="none",  # Disable logging to Hugging Face
+    eval_strategy="no",  # ✅ Updated deprecated argument
+    fp16=True,  # ✅ Mixed Precision for speed
+    optim="adamw_bnb_8bit",
+    report_to="none",
 )
 
 # Trainer
@@ -63,7 +79,7 @@ trainer = Trainer(
     train_dataset=tokenized_datasets["train"],
 )
 
-# Fine-Tune the Model
+# 🚀 Start Fine-Tuning
 trainer.train()
 
 # Save Model

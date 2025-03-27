@@ -2,19 +2,27 @@ import gradio as gr
 import shutil
 import os
 import chromadb
+import sys
+
+# Add project root to sys.path to allow relative imports
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+
 from scripts.rag_ingest import ingest_documents
 
-UPLOAD_DIR = "./company_docs"
-VECTOR_DB_DIR = "./vector_store/chroma_db"
+# Set paths relative to project root
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+UPLOAD_DIR = os.path.join(PROJECT_ROOT, "company_docs")
+VECTOR_DB_DIR = os.path.join(PROJECT_ROOT, "vector_store", "chroma_db")
+
+# Set up ChromaDB client and collection
 client = chromadb.PersistentClient(path=VECTOR_DB_DIR)
 collection = client.get_or_create_collection(name="company_docs")
-
 
 def handle_upload(file):
     if not file:
         return "⚠️ No file uploaded."
 
-    # Extract the original filename
+    # Extract filename and save
     original_filename = file.name.split("/")[-1]
     save_path = os.path.join(UPLOAD_DIR, original_filename)
 
@@ -23,11 +31,9 @@ def handle_upload(file):
 
     return f"✅ Uploaded and saved {original_filename} to company_docs/"
 
-
 def run_ingest():
     chunks_added = ingest_documents()
     return f"✅ Ingestion complete. {chunks_added} new chunks added to the vector DB."
-
 
 def show_vector_db_contents():
     all_items = collection.get(include=["documents", "metadatas"])
@@ -36,7 +42,7 @@ def show_vector_db_contents():
         return "⚠️ The vector database is currently empty."
     else:
         summary = f"✅ Current vector DB has {count} chunks:\n\n"
-        for i in range(min(count, 5)):  # Show first 5 records only
+        for i in range(min(count, 5)):
             source = all_items['metadatas'][i].get('source')
             preview = all_items['documents'][i][:80]
             summary += f"- From **{source}**: \"{preview}...\"\n"
@@ -44,7 +50,7 @@ def show_vector_db_contents():
             summary += f"\n... and {count - 5} more chunks."
         return summary
 
-
+# Gradio UI
 with gr.Blocks() as admin_app:
     gr.Markdown("# 🛠️ BizBot Admin Panel")
 

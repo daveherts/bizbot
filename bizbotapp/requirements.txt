@@ -91,3 +91,8 @@ uvicorn==0.34.0
 websockets==15.0.1
 xxhash==3.5.0
 yarl==1.18.3
+
+# Added for RAG and Admin Panel functionality
+sentence-transformers==2.6.1
+chromadb==0.4.24
+langchain==0.1.16

@@ -4,7 +4,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 
 # === Path Setup ===
-
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
 
@@ -12,7 +11,6 @@ DOCS_DIR = os.path.join(PROJECT_ROOT, "company_docs")
 VECTOR_DB_DIR = os.path.join(PROJECT_ROOT, "vector_store", "chroma_db")
 
 # === Setup ChromaDB and Embedder ===
-
 embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 
@@ -20,7 +18,6 @@ client = chromadb.PersistentClient(path=VECTOR_DB_DIR)
 collection = client.get_or_create_collection(name="company_docs")
 
 # === Ingestion Function ===
-
 def ingest_documents():
     new_chunks_count = 0
 

@@ -9,13 +9,13 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".
 
 from rag_ingest import ingest_documents
 
-
-# Set paths relative to project root
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+# === Path Setup ===
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
 UPLOAD_DIR = os.path.join(PROJECT_ROOT, "company_docs")
 VECTOR_DB_DIR = os.path.join(PROJECT_ROOT, "vector_store", "chroma_db")
 
-# Set up ChromaDB client and collection
+# === Chroma Client Setup ===
 client = chromadb.PersistentClient(path=VECTOR_DB_DIR)
 collection = client.get_or_create_collection(name="company_docs")
 

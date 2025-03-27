@@ -10,25 +10,28 @@ import gradio as gr
 # Path Setup
 # ========================
 
-# Get the current script's directory and go up one level to project root
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, ".."))
+PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
 
-# Define model and vector store paths
 MODEL_DIR = os.path.join(PROJECT_ROOT, "models")
-BASE_MODEL_PATH = os.path.join(MODEL_DIR, "base/Llama-3.2-1B-Instruct")
-ADAPTER_PATH = os.path.join(MODEL_DIR, "adapters/llamaft/checkpoint-20154")
-VECTOR_DB_DIR = os.path.join(PROJECT_ROOT, "vector_store/chroma_db")
+BASE_MODEL_PATH = os.path.join(MODEL_DIR, "base", "Llama-3.2-1B-Instruct")
+ADAPTER_PATH = os.path.join(MODEL_DIR, "adapters", "llamaft", "checkpoint-20154")
+VECTOR_DB_DIR = os.path.join(PROJECT_ROOT, "vector_store", "chroma_db")
 
-# Device setup
+# ========================
+# Device Setup
+# ========================
+
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# Global variables
+# ========================
+# Global State
+# ========================
+
 current_model = None
 current_tokenizer = None
 conversation_history = []
 
-# RAG instructions
 INSTRUCTIONS = (
     "You are a helpful customer service assistant for BrewBeans Co. "
     "Use the provided company information where possible to answer questions clearly and accurately."
@@ -45,7 +48,7 @@ collection = client.get_or_create_collection(name="company_docs")
 embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
 # ========================
-# Model Handling Functions
+# Model Handling
 # ========================
 
 def ensure_base_model():
@@ -149,7 +152,6 @@ def chat(user_input):
 # Launch Gradio App
 # ========================
 
-# Auto-load model on startup
 load_bizbot()
 
 with gr.Blocks() as demo:

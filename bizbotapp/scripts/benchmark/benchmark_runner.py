@@ -5,20 +5,19 @@ import csv
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
-# Flags
+# === Flags ===
 USE_FINE_TUNED = True
 USE_RAG = True
 
-# Paths
-BENCHMARK_PATH = "benchmark_set.json"
-RESULTS_PATH = "benchmark_results.csv"
+# === File Paths ===
+SCRIPT_DIR = os.path.dirname(__file__)
+BENCHMARK_PATH = os.path.join(SCRIPT_DIR, "benchmark_questions.json")
+RESULTS_PATH = os.path.join(SCRIPT_DIR, "benchmark_results.csv")
 
-# Load model/tokenizer (toggle between base or fine-tuned model)
+# === Load Model ===
 def load_model():
     if USE_FINE_TUNED:
-        # Load your fine-tuned BizBot model here
-        # Replace with actual loading code (LoRA, PEFT, etc.)
-        model_path = "../models/fine_tuned"
+        model_path = os.path.join(SCRIPT_DIR, "..", "models", "fine_tuned")
     else:
         model_path = "meta-llama/Llama-3.2-1B-Instruct"
 
@@ -31,28 +30,32 @@ def load_model():
     )
     return tokenizer, model
 
-# Dummy RAG retriever function
+# === Dummy RAG Retriever ===
 def retrieve_context(query):
-    return "Relevant retrieved context for: " + query  # Replace with actual RAG call
+    return "Relevant retrieved context for: " + query  # Replace with actual retriever
 
+# === Prompt Formatting ===
 def format_prompt(user_input, rag_context=""):
     instructions = "You are a helpful assistant for BrewBeans Co."
     return f"System: {instructions}\n\n{rag_context}\n\nUser: {user_input}\n\nAssistant:"
 
+# === Load Benchmark Questions ===
 def load_benchmark():
     with open(BENCHMARK_PATH, "r") as f:
         return json.load(f)
 
+# === Keyword-Based Accuracy Scoring ===
 def evaluate_response(response, expected_keywords):
     matches = sum(kw.lower() in response.lower() for kw in expected_keywords)
     return matches / len(expected_keywords)
 
+# === Benchmark Runner ===
 def benchmark():
     tokenizer, model = load_model()
     dataset = load_benchmark()
 
     with open(RESULTS_PATH, "w", newline="") as csvfile:
-        fieldnames = ["question", "response", "latency", "accuracy", "pass"]
+        fieldnames = ["question", "response", "latency", "accuracy", "pass", "model_type"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
 
@@ -70,22 +73,23 @@ def benchmark():
                     **inputs, max_new_tokens=100, temperature=0.2
                 )
             latency = time.time() - start
-
             response = tokenizer.decode(outputs[0], skip_special_tokens=True)
-            acc = evaluate_response(response, expected_keywords)
 
-            # Thresholds
+            acc = evaluate_response(response, expected_keywords)
             pass_status = acc >= 0.8 and latency <= 3.0
             mark = "✅" if pass_status else "⚠️"
+            model_type = "fine-tuned-RAG" if USE_FINE_TUNED and USE_RAG else "base"
 
-            print(f"Q: {question}\nA: {response}\nLatency: {latency:.2f}s | Accuracy: {acc:.2f} {mark}\n")
+            print(f"\nQ: {question}\nA: {response}")
+            print(f"Latency: {latency:.2f}s | Accuracy: {acc:.2f} {mark}")
 
             writer.writerow({
                 "question": question,
                 "response": response,
                 "latency": round(latency, 2),
                 "accuracy": round(acc, 2),
-                "pass": "yes" if pass_status else "no"
+                "pass": "yes" if pass_status else "no",
+                "model_type": model_type
             })
 
 if __name__ == "__main__":

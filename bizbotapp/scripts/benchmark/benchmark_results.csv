@@ -1,0 +1,402 @@
+question,response,latency,accuracy,pass,model_type
+How do I return a subscription box?,"System: You are a helpful assistant for BrewBeans Co.
+
+**1.6 Subscription Returns**
+- First-time subscription boxes are refundable
+- Ongoing subscriptions can be cancelled anytime via your BrewBeans account
+- Refunds for recurring orders are available if returned unopened within 14 days
+
+**1.7 Gift Returns**
+- Returns on gifts are eligible for store credit only
+- Gift recipients can return anonymously using a gift return ID
+**1.3 Non-Returnable Items**
+- Gift cards
+- Items marked as final sale
+- Opened perishables
+
+**1.4 Exchanges**
+Exchanges are permitted for defective products within 14 days of delivery.
+
+**1.5 Return Process**
+1. Visit https://brewbeans.co.uk/returns
+2. Print your prepaid Royal Mail return label
+3. Drop the package at your nearest Post Office branch
+4. Await confirmation email within 48 hours
+**1.8 International Returns**
+- Customers must cover international return postage
+- Contact support for customs documentation and return instructions
+
+**1.9 Customer Rights**
+- Complies with the UK Consumer Contracts Regulations 2013
+
+---
+
+User: How do I return a subscription box?
+
+Assistant: I'm here to assist you with the process of returning a subscription box. To initiate the return, please follow these steps:
+
+1. Visit our website at {{Website URL}} and navigate to the '{{Checkout}}' or '{{Order}}' page.
+2. Look for the '{{Return}}' or '{{Refund}}' option and select it.
+3. Provide the necessary details, including your order number, shipping address, and any relevant tracking information.
+4. Double-check the information for accuracy and",3.05,1.0,no,Fine-Tuned + RAG
+Do you deliver outside the UK?,"System: You are a helpful assistant for BrewBeans Co.
+
+Shipping and Fulfilment Policy
+
+**Shipping & Fulfilment Policy**
+
+**2.1 Domestic Shipping (UK)**
+We ship across the UK via Royal Mail and DPD. Standard delivery is 2–3 working days. Orders over £50 qualify for free delivery.
+
+**2.2 International Shipping**
+We deliver to: Ireland, France, Germany, Netherlands, Italy, USA, Canada, and Australia. Estimated delivery time: 7–10 working days. Customs fees may apply.
+**2.3 Same-Day & Express Delivery**
+- Same-day delivery: Available in Greater London Zones 1–3 (order by 10am)
+- Next-day delivery: Available UK-wide via DPD (£4.99)
+- In-store pickup: Available at Shoreditch and Manchester flagship stores
+
+**2.4 Delivery Notifications**
+All orders receive a tracking link via email/SMS. Notifications are sent for dispatch, out-for-delivery, and successful delivery.
+**1.8 International Returns**
+- Customers must cover international return postage
+- Contact support for customs documentation and return instructions
+
+**1.9 Customer Rights**
+- Complies with the UK Consumer Contracts Regulations 2013
+
+---
+
+User: Do you deliver outside the UK?
+
+Assistant: Yes, we do deliver to {{Delivery Country}}. We have a wide range of international shipping options available, including:
+
+- Same-day delivery in Greater London Zones 1–3
+- Next-day delivery in UK-wide zones
+- In-store pickup at our flagship stores in Shoreditch and Manchester
+
+Please let me know if you have any other questions or if there's anything else I can assist you with.",2.09,0.67,no,Fine-Tuned + RAG
+What are your support hours?,"System: You are a helpful assistant for BrewBeans Co.
+
+**3.4 Chatbot Availability**
+BizBot is available 24/7 via the website for FAQs, returns, and product queries.
+
+**3.5 VIP Support**
+Tier 3 subscribers receive priority response in under 12 hours (email/live chat).
+
+**3.6 Self-Service Hub**
+Track orders, manage subscriptions, initiate returns:
+https://brewbeans.co.uk/help
+
+---
+Customer Support Procedures
+
+**Customer Support Operating Procedures**
+
+**3.1 Support Hours**
+- Monday–Friday: 08:00–20:00 GMT
+- Saturday: 09:00–17:00 GMT
+- Closed on bank holidays (UK-wide)
+
+**3.2 Contact Channels**
+- **Email**: support@brewbeans.co.uk
+- **Live Chat**: Via https://brewbeans.co.uk (during hours above)
+- **Phone**: 020 8123 4567 (Mon–Fri)
+- **Twitter/X**: @BrewBeansHelp
+
+**3.3 Supported Languages**
+- English, Welsh, Spanish, French, German
+Shipping and Fulfilment Policy
+
+**Shipping & Fulfilment Policy**
+
+**2.1 Domestic Shipping (UK)**
+We ship across the UK via Royal Mail and DPD. Standard delivery is 2–3 working days. Orders over £50 qualify for free delivery.
+
+**2.2 International Shipping**
+We deliver to: Ireland, France, Germany, Netherlands, Italy, USA, Canada, and Australia. Estimated delivery time: 7–10 working days. Customs fees may apply.
+
+User: What are your support hours?
+
+Assistant: I'm aware! Our support hours are from {{Monday}} to {{Friday}} at {{Saturday}}. If you have any other questions, feel free to ask.",0.81,1.0,yes,Fine-Tuned + RAG
+Is your coffee ethically sourced?,"System: You are a helpful assistant for BrewBeans Co.
+
+Sustainability and Ethics
+
+**Sustainability and Ethics Statement**
+
+**4.1 Our Mission**
+We are committed to environmentally and socially responsible coffee, offering:
+- 100% recyclable or compostable packaging (by 2026)
+- Carbon-neutral delivery (target: 2025)
+- Compostable pods and sustainable capsule partnerships
+**4.2 Ethical Sourcing**
+- 100% Fair Trade or Rainforest Alliance Certified beans
+- Ethical sourcing from farms in Brazil, Ethiopia, Kenya, and Colombia
+- Women-led cooperatives and smallholder priority sourcing
+
+**4.3 Transparency & Audits**
+- Biannual third-party ethical sourcing audits
+- Full traceability via QR codes on retail packaging
+- Ingredient origin disclosure on every product page
+**4.4 Community Impact**
+3% of annual profit supports:
+- Clean water initiatives
+- Farmer education & equity schemes
+- Renewable energy programs in coffee-growing communities
+
+**4.5 Consumer Education**
+Visit https://brewbeans.co.uk/sustainability for:
+- Packaging disposal guides
+- Sustainability reports
+- Our Net Zero roadmap
+
+---
+
+User: Is your coffee ethically sourced?
+
+Assistant: Absolutely! We strive to provide high-quality coffee while adhering to our sustainability and ethical sourcing principles. Our commitment to fair trade, transparency, and community impact is deeply ingrained in our mission. If you have any further questions or concerns, please feel free to let me know.",1.4,1.0,yes,Fine-Tuned + RAG
+Can I track my order?,"System: You are a helpful assistant for BrewBeans Co.
+
+**2.3 Same-Day & Express Delivery**
+- Same-day delivery: Available in Greater London Zones 1–3 (order by 10am)
+- Next-day delivery: Available UK-wide via DPD (£4.99)
+- In-store pickup: Available at Shoreditch and Manchester flagship stores
+
+**2.4 Delivery Notifications**
+All orders receive a tracking link via email/SMS. Notifications are sent for dispatch, out-for-delivery, and successful delivery.
+**1.3 Non-Returnable Items**
+- Gift cards
+- Items marked as final sale
+- Opened perishables
+
+**1.4 Exchanges**
+Exchanges are permitted for defective products within 14 days of delivery.
+
+**1.5 Return Process**
+1. Visit https://brewbeans.co.uk/returns
+2. Print your prepaid Royal Mail return label
+3. Drop the package at your nearest Post Office branch
+4. Await confirmation email within 48 hours
+**2.5 Lost or Delayed Shipments**
+If tracking is inactive for 72 hours, contact support. Replacement orders issued within 48 hours after investigation.
+
+**2.6 VAT and Customs**
+- UK VAT is applied at checkout
+- EU customers: VAT included unless noted
+- Rest of world: Local taxes may apply upon delivery
+
+---
+
+User: Can I track my order?
+
+Assistant: I'm on it! To track your order, please visit the '{{Order Number}}' section on our website. If you're unable to locate it there, you can reach out to our customer support team for further assistance.",1.15,1.0,yes,Fine-Tuned + RAG
+Is the Vanilla Oat Milk Latte vegan?,"System: You are a helpful assistant for BrewBeans Co.
+
+Product: Vanilla Oat Milk Latte  
+Ingredients: Arabica, oat milk, vanilla extract  
+Calories: 90 kcal  
+Fat: 2.5g  
+Vegan: Yes  
+Vegetarian: Yes  
+Allergens: Oats  
+Caffeine: 75mg  
+Format: Canned  
+Price: £3.49  
+Subscription: £2.99/mo  
+Notes: Barista-style canned latte  
+---
+Product: Caramel Cappuccino Sachets  
+Ingredients: Arabica, milk powder, caramel flavour  
+Calories: 110 kcal  
+Fat: 5g  
+Vegan: No  
+Vegetarian: Yes  
+Allergens: Dairy  
+Caffeine: 90mg  
+Format: Sachet  
+Price: £4.50  
+Subscription: £3.95/mo  
+Notes: Single-serve packets  
+---
+Product: Holiday Hazelnut Roast  
+Ingredients: Arabica, hazelnut oil  
+Calories: 6 kcal  
+Fat: 0.2g  
+Vegan: No  
+Vegetarian: Yes  
+Allergens: Nuts  
+Caffeine: 88mg  
+Format: Ground  
+Price: £8.99  
+Subscription: £7.50/mo  
+Notes: Limited edition  
+---
+
+User: Is the Vanilla Oat Milk Latte vegan?
+
+Assistant: Yes, the Vanilla Oat Milk Latte is indeed vegan. It is made with oat milk, vanilla extract, and no animal-derived ingredients.",0.75,1.0,yes,Fine-Tuned + RAG
+What’s your refund policy?,"System: You are a helpful assistant for BrewBeans Co.
+
+Return and Refund Policy
+
+**Return and Refund Policy**
+
+**Effective Date**: January 1, 2024
+
+**1.1 Returns**
+Customers may return unopened BrewBeans products within 30 days of delivery for a full refund. Opened items are eligible for store credit only. Customers must provide a valid proof of purchase (order ID or receipt).
+
+**1.2 Refunds**
+Refunds are processed to the original payment method within 5–7 business days after return verification. Refunds to PayPal may take up to 10 business days.
+**1.8 International Returns**
+- Customers must cover international return postage
+- Contact support for customs documentation and return instructions
+
+**1.9 Customer Rights**
+- Complies with the UK Consumer Contracts Regulations 2013
+
+---
+**1.6 Subscription Returns**
+- First-time subscription boxes are refundable
+- Ongoing subscriptions can be cancelled anytime via your BrewBeans account
+- Refunds for recurring orders are available if returned unopened within 14 days
+
+**1.7 Gift Returns**
+- Returns on gifts are eligible for store credit only
+- Gift recipients can return anonymously using a gift return ID
+
+User: What’s your refund policy?
+
+Assistant: I apologize for any confusion. Our refund policy is as follows:
+
+**1.1 Returns**
+- Customers may return unopened BrewBeans products within 30 days of delivery for a full refund. Opened items are eligible for store credit only. Customers must provide a valid proof of purchase (order ID or receipt).
+
+**1.2 Refunds**
+- Refunds are processed to the original payment method within 5–7 business days after return verification. Refunds to PayPal may take up to ",-0.08,1.0,yes,Fine-Tuned + RAG
+Do you offer same-day delivery?,"System: You are a helpful assistant for BrewBeans Co.
+
+**2.3 Same-Day & Express Delivery**
+- Same-day delivery: Available in Greater London Zones 1–3 (order by 10am)
+- Next-day delivery: Available UK-wide via DPD (£4.99)
+- In-store pickup: Available at Shoreditch and Manchester flagship stores
+
+**2.4 Delivery Notifications**
+All orders receive a tracking link via email/SMS. Notifications are sent for dispatch, out-for-delivery, and successful delivery.
+Shipping and Fulfilment Policy
+
+**Shipping & Fulfilment Policy**
+
+**2.1 Domestic Shipping (UK)**
+We ship across the UK via Royal Mail and DPD. Standard delivery is 2–3 working days. Orders over £50 qualify for free delivery.
+
+**2.2 International Shipping**
+We deliver to: Ireland, France, Germany, Netherlands, Italy, USA, Canada, and Australia. Estimated delivery time: 7–10 working days. Customs fees may apply.
+**1.3 Non-Returnable Items**
+- Gift cards
+- Items marked as final sale
+- Opened perishables
+
+**1.4 Exchanges**
+Exchanges are permitted for defective products within 14 days of delivery.
+
+**1.5 Return Process**
+1. Visit https://brewbeans.co.uk/returns
+2. Print your prepaid Royal Mail return label
+3. Drop the package at your nearest Post Office branch
+4. Await confirmation email within 48 hours
+
+User: Do you offer same-day delivery?
+
+Assistant: I'm here to assist you with your question. Yes, we do offer same-day delivery in Greater London Zones 1–3. To place an order for same-day delivery, please select the same-day delivery option during the checkout process. If you have any further questions or need additional assistance, feel free to let me know.",1.69,1.0,yes,Fine-Tuned + RAG
+What allergens are in the Almond Mocha Ground?,"System: You are a helpful assistant for BrewBeans Co.
+
+Product: Almond Mocha Ground  
+Ingredients: Arabica, cocoa, almond extract  
+Calories: 10 kcal  
+Fat: 0.5g  
+Vegan: No  
+Vegetarian: Yes  
+Allergens: Nuts  
+Caffeine: 90mg  
+Format: Ground  
+Price: £7.99  
+Subscription: £6.49/mo  
+Notes: Contains almonds  
+---
+Product: Holiday Hazelnut Roast  
+Ingredients: Arabica, hazelnut oil  
+Calories: 6 kcal  
+Fat: 0.2g  
+Vegan: No  
+Vegetarian: Yes  
+Allergens: Nuts  
+Caffeine: 88mg  
+Format: Ground  
+Price: £8.99  
+Subscription: £7.50/mo  
+Notes: Limited edition  
+---
+Product: Spiced Chai Beans  
+Ingredients: Arabica, cardamom, cinnamon, clove  
+Calories: 9 kcal  
+Fat: 0.4g  
+Vegan: Yes  
+Vegetarian: Yes  
+Allergens: None  
+Caffeine: 85mg  
+Format: Beans  
+Price: £8.25  
+Subscription: £7.25/mo  
+Notes: Aromatic blend  
+---
+
+User: What allergens are in the Almond Mocha Ground?
+
+Assistant: Thank you for reaching out to us regarding the ingredients in the Almond Mocha Ground. Our product contains Arabica, cocoa, and almond extract. If you have any specific allergies or concerns, please let us know so that we can provide you with the necessary information and take the necessary steps to ensure your safety.",1.65,1.0,yes,Fine-Tuned + RAG
+How do I cancel my subscription?,"System: You are a helpful assistant for BrewBeans Co.
+
+**1.6 Subscription Returns**
+- First-time subscription boxes are refundable
+- Ongoing subscriptions can be cancelled anytime via your BrewBeans account
+- Refunds for recurring orders are available if returned unopened within 14 days
+
+**1.7 Gift Returns**
+- Returns on gifts are eligible for store credit only
+- Gift recipients can return anonymously using a gift return ID
+**3.4 Chatbot Availability**
+BizBot is available 24/7 via the website for FAQs, returns, and product queries.
+
+**3.5 VIP Support**
+Tier 3 subscribers receive priority response in under 12 hours (email/live chat).
+
+**3.6 Self-Service Hub**
+Track orders, manage subscriptions, initiate returns:
+https://brewbeans.co.uk/help
+
+---
+**1.3 Non-Returnable Items**
+- Gift cards
+- Items marked as final sale
+- Opened perishables
+
+**1.4 Exchanges**
+Exchanges are permitted for defective products within 14 days of delivery.
+
+**1.5 Return Process**
+1. Visit https://brewbeans.co.uk/returns
+2. Print your prepaid Royal Mail return label
+3. Drop the package at your nearest Post Office branch
+4. Await confirmation email within 48 hours
+
+User: How do I cancel my subscription?
+
+Assistant: I'm sorry to hear that you're no longer interested in our subscription. To cancel your subscription, please follow these steps:
+
+1. Log in to your BrewBeans account
+2. Navigate to your account settings or profile section
+3. Look for the subscription management option
+4. Select the specific subscription you wish to cancel
+5. Confirm the cancellation and any associated fees or charges
+
+If you encounter any difficulties or have further questions, please don't hesitate to reach out to our dedicated customer support",2.45,1.0,yes,Fine-Tuned + RAG

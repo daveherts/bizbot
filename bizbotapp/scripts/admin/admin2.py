@@ -21,7 +21,7 @@ collection = client.get_or_create_collection(name="company_docs")
 
 def handle_upload(file):
     if not file:
-        return "⚠️ No file uploaded."
+        return "No file uploaded."
 
     original_filename = file.name.split("/")[-1]
     save_path = os.path.join(UPLOAD_DIR, original_filename)
@@ -29,23 +29,23 @@ def handle_upload(file):
     os.makedirs(UPLOAD_DIR, exist_ok=True)
     shutil.move(file.name, save_path)
 
-    return f"✅ Uploaded and saved {original_filename} to company_docs/"
+    return f"Uploaded and saved {original_filename} to company_docs/"
 
 def run_ingest():
     chunks_added = ingest_documents()
-    return f"✅ Ingestion complete. {chunks_added} new chunks added to the vector DB."
+    return f"Ingestion complete. {chunks_added} new chunks added to the vector DB."
 
 def show_vector_db_contents():
     all_items = collection.get(include=["documents", "metadatas"])
     count = len(all_items["ids"])
     if count == 0:
-        return "⚠️ The vector database is currently empty."
+        return "The vector database is currently empty."
     else:
-        summary = f"✅ Current vector DB has {count} chunks:\n\n"
+        summary = f"Current vector DB has {count} chunks:\n\n"
         for i in range(min(count, 5)):
             source = all_items['metadatas'][i].get('source')
             preview = all_items['documents'][i][:80]
-            summary += f"- From **{source}**: \"{preview}...\"\n"
+            summary += f"- From {source}: \"{preview}...\"\n"
         if count > 5:
             summary += f"\n... and {count - 5} more chunks."
         return summary
@@ -58,26 +58,25 @@ def remove_from_vector_db(filename):
     ]
 
     if not ids_to_delete:
-        return f"⚠️ No chunks found in vector DB from file: {filename}"
+        return f"No chunks found in vector DB from file: {filename}"
 
     collection.delete(ids=ids_to_delete)
-    return f"🗑️ Removed {len(ids_to_delete)} chunks from vector DB for file: {filename}"
+    return f"Removed {len(ids_to_delete)} chunks from vector DB for file: {filename}"
 
-# ✅ FIXED: Clear all function using ID-based deletion
 def clear_entire_vector_db():
     try:
-        all_items = collection.get(include=["ids"])
+        all_items = collection.get()
         all_ids = all_items["ids"]
         if not all_ids:
-            return "⚠️ Vector DB is already empty."
+            return "Vector DB is already empty."
         collection.delete(ids=all_ids)
-        return f"🗑️ Deleted {len(all_ids)} items from the vector DB."
+        return f"Deleted {len(all_ids)} items from the vector DB."
     except Exception as e:
-        return f"❌ Error: {str(e)}"
+        return f"Error: {str(e)}"
 
 # Gradio UI
 with gr.Blocks() as admin_app:
-    gr.Markdown("# 🛠️ BizBot Admin Panel")
+    gr.Markdown("# BizBot Admin Panel")
 
     with gr.Row():
         upload = gr.File(label="Upload Company Document", file_types=[".txt"], interactive=True)
@@ -95,17 +94,14 @@ with gr.Blocks() as admin_app:
         delete_button = gr.Button("Remove File Chunks from Vector DB")
     delete_status = gr.Textbox(label="Deletion Result", interactive=False)
 
-    # ✅ NEW: Clear all button
     with gr.Row():
-        clear_all_button = gr.Button("❌ Remove ALL from Vector DB")
+        clear_all_button = gr.Button("Remove ALL from Vector DB")
     clear_all_status = gr.Textbox(label="Clear All Result", interactive=False)
 
     upload_button.click(handle_upload, inputs=[upload], outputs=upload_status)
     ingest_button.click(run_ingest, outputs=ingest_status)
     check_db_button.click(show_vector_db_contents, outputs=db_contents_box)
     delete_button.click(remove_from_vector_db, inputs=delete_filename, outputs=delete_status)
-
-    # ✅ Hook up clear all button
     clear_all_button.click(clear_entire_vector_db, outputs=clear_all_status)
 
 admin_app.launch()

@@ -1,0 +1,143 @@
+Product Catalogue – BrewBeans Co.
+
+*(Excerpt: 10 out of 100+ items)*
+
+Product: Colombian Classic Roast  
+Ingredients: Arabica beans  
+Calories: 2 kcal  
+Fat: 0g  
+Vegan: Yes  
+Vegetarian: Yes  
+Allergens: None  
+Caffeine: 95mg  
+Format: Beans  
+Price: £6.99  
+Subscription: £5.99/mo  
+Notes: Medium roast  
+---
+
+Product: Morning Boost Pods  
+Ingredients: Robusta, ginseng, maca  
+Calories: 12 kcal  
+Fat: 0.3g  
+Vegan: Yes  
+Vegetarian: Yes  
+Allergens: None  
+Caffeine: 120mg  
+Format: Pods  
+Price: £8.50  
+Subscription: £7.50/mo  
+Notes: Energy-enhancing  
+---
+
+Product: Decaf House Blend  
+Ingredients: Arabica (decaf), chicory  
+Calories: 4 kcal  
+Fat: 0.1g  
+Vegan: Yes  
+Vegetarian: Yes  
+Allergens: None  
+Caffeine: <5mg  
+Format: Ground  
+Price: £7.00  
+Subscription: £6.00/mo  
+Notes: Swiss water processed  
+---
+
+Product: Almond Mocha Ground  
+Ingredients: Arabica, cocoa, almond extract  
+Calories: 10 kcal  
+Fat: 0.5g  
+Vegan: No  
+Vegetarian: Yes  
+Allergens: Nuts  
+Caffeine: 90mg  
+Format: Ground  
+Price: £7.99  
+Subscription: £6.49/mo  
+Notes: Contains almonds  
+---
+
+Product: Spiced Chai Beans  
+Ingredients: Arabica, cardamom, cinnamon, clove  
+Calories: 9 kcal  
+Fat: 0.4g  
+Vegan: Yes  
+Vegetarian: Yes  
+Allergens: None  
+Caffeine: 85mg  
+Format: Beans  
+Price: £8.25  
+Subscription: £7.25/mo  
+Notes: Aromatic blend  
+---
+
+Product: Nitro Cold Brew Bottles  
+Ingredients: Arabica extract, nitrogen-infused water  
+Calories: 5 kcal  
+Fat: 0g  
+Vegan: Yes  
+Vegetarian: Yes  
+Allergens: None  
+Caffeine: 80mg  
+Format: Bottled  
+Price: £2.99  
+Subscription: £2.50/mo  
+Notes: Ready to drink  
+---
+
+Product: Vanilla Oat Milk Latte  
+Ingredients: Arabica, oat milk, vanilla extract  
+Calories: 90 kcal  
+Fat: 2.5g  
+Vegan: Yes  
+Vegetarian: Yes  
+Allergens: Oats  
+Caffeine: 75mg  
+Format: Canned  
+Price: £3.49  
+Subscription: £2.99/mo  
+Notes: Barista-style canned latte  
+---
+
+Product: Keto Espresso Shot  
+Ingredients: Robusta, MCT oil, stevia  
+Calories: 25 kcal  
+Fat: 3g  
+Vegan: Yes  
+Vegetarian: Yes  
+Allergens: None  
+Caffeine: 110mg  
+Format: Shot  
+Price: £2.99  
+Subscription: £2.49/mo  
+Notes: Keto-friendly  
+---
+
+Product: Caramel Cappuccino Sachets  
+Ingredients: Arabica, milk powder, caramel flavour  
+Calories: 110 kcal  
+Fat: 5g  
+Vegan: No  
+Vegetarian: Yes  
+Allergens: Dairy  
+Caffeine: 90mg  
+Format: Sachet  
+Price: £4.50  
+Subscription: £3.95/mo  
+Notes: Single-serve packets  
+---
+
+Product: Holiday Hazelnut Roast  
+Ingredients: Arabica, hazelnut oil  
+Calories: 6 kcal  
+Fat: 0.2g  
+Vegan: No  
+Vegetarian: Yes  
+Allergens: Nuts  
+Caffeine: 88mg  
+Format: Ground  
+Price: £8.99  
+Subscription: £7.50/mo  
+Notes: Limited edition  
+---

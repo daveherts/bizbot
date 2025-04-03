@@ -12,3 +12,6 @@ __pycache__/
 
 # Ignore virtual environment folder
 venv/
+
+# Exclude all locally cached model files
+benchmark2/hf_models/

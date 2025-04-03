@@ -1,0 +1,82 @@
+[
+    {
+      "question": "How do I return a subscription box?",
+      "expected_keywords": [
+        "subscription",
+        "return",
+        "14 days"
+      ]
+    },
+    {
+      "question": "Do you deliver outside the UK?",
+      "expected_keywords": [
+        "international",
+        "countries",
+        "customs"
+      ]
+    },
+    {
+      "question": "What are your support hours?",
+      "expected_keywords": [
+        "Monday",
+        "Saturday",
+        "bank holidays"
+      ]
+    },
+    {
+      "question": "Is your coffee ethically sourced?",
+      "expected_keywords": [
+        "Fair Trade",
+        "Rainforest Alliance",
+        "ethical"
+      ]
+    },
+    {
+      "question": "Can I track my order?",
+      "expected_keywords": [
+        "tracking",
+        "email",
+        "SMS"
+      ]
+    },
+    {
+      "question": "Is the Vanilla Oat Milk Latte vegan?",
+      "expected_keywords": [
+        "Vanilla Oat Milk Latte",
+        "vegan",
+        "oat milk"
+      ]
+    },
+    {
+      "question": "What\u2019s your refund policy?",
+      "expected_keywords": [
+        "refund",
+        "original payment",
+        "7 business days"
+      ]
+    },
+    {
+      "question": "Do you offer same-day delivery?",
+      "expected_keywords": [
+        "same-day",
+        "London",
+        "10am"
+      ]
+    },
+    {
+      "question": "What allergens are in the Almond Mocha Ground?",
+      "expected_keywords": [
+        "almond",
+        "nuts",
+        "allergen"
+      ]
+    },
+    {
+      "question": "How do I cancel my subscription?",
+      "expected_keywords": [
+        "cancel",
+        "subscription",
+        "account"
+      ]
+    }
+  ]

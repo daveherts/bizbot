@@ -8,7 +8,7 @@ os.makedirs(HF_MODEL_DIR, exist_ok=True)
 
 # Model keys and corresponding Hugging Face Hub IDs
 MODEL_MAP = {
-    "llama-1b": "meta-llama/Llama-3.2-1B-Instruct",
+"llama-1b": "meta-llama/Llama-3.2-1B-Instruct",
     "llama-3b": "meta-llama/Llama-3.2-3B-Instruct",
     "phi-2": "microsoft/phi-2",
     "phi-4-mini": "microsoft/Phi-4-mini-instruct",

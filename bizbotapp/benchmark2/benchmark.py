@@ -8,8 +8,7 @@ from benchmetrics.tone_analysis import evaluate_tone
 
 
 MODELS_TO_TEST = [
-    "llama-1b", "llama-3b", "phi-2", "phi-4-mini",
-    "mistral-7b", "gemma-1b", "gemma-7b"
+    "gemma-1b", "gemma-7b"
 ]
 
 QUESTIONS_PATH = "benchmark2/data/benchmark_questions.json"

@@ -9,7 +9,7 @@ BASE_MODEL_ID = "meta-llama/Llama-3.2-1B-Instruct"
 FT_BASE_PATH = "./models/base/Llama-3.2-1B-Instruct"
 FT_ADAPTER_PATH = "./models/adapters/llamaft/checkpoint-20154"
 
-RESULTS_CSV = "benchmark2/results/base_vs_ft_loadtest_1_short.csv"
+RESULTS_CSV = "benchmark2/results/base_vs_ft_loadtest_20_short.csv"
 PROMPT = "How do I cancel my subscription?"
 CONCURRENCY = 20
 MAX_TOKENS = 30  # ~20 words

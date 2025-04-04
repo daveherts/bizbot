@@ -1,55 +1,33 @@
-from model_loader_ft import load_model
-from benchmetrics.accuracy import evaluate_keywords
-from benchmetrics.latency import time_inference
-from benchmetrics.tone_analysis import evaluate_tone
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from peft import PeftModel
 
-MODELS_TO_TEST = ["fine-tuned-llama-1b"]
+MODEL_MAP = {
+    "fine-tuned-llama-1b": {
+        "base": "./models/base/Llama-3.2-1B-Instruct",
+        "adapter": "./models/adapters/llamaft/checkpoint-20154"
+    }
+}
 
-QUESTIONS_PATH = "benchmark2/data/benchmark_questions.json"
-TONE_SAMPLE_PATH = "benchmark2/data/bitext_sample.json"
-RESULTS_CSV = "benchmark2/results/full_results_ft.csv"
-TONE_CSV = "benchmark2/results/tone_scores_ft.csv"
+def load_model(model_key):
+    entry = MODEL_MAP.get(model_key)
 
-def run_single_eval(model_key):
-    tokenizer, model = load_model(model_key)
-    import json, csv
-    with open(QUESTIONS_PATH) as f:
-        questions = json.load(f)
+    if not entry or not isinstance(entry, dict):
+        raise ValueError(f"Unknown fine-tuned model key: {model_key}")
 
-    print(f"⚙️ Running benchmark for: {model_key}")
-    with open(RESULTS_CSV, "a", newline="") as file:
-        writer = csv.writer(file)
-        for q in questions:
-            prompt = q["question"]
-            expected = q["expected_keywords"]
-            latency, output = time_inference(model, tokenizer, prompt)
-            accuracy = evaluate_keywords(output, expected)
-            writer.writerow([prompt, output, round(latency, 2), accuracy, model_key])
+    base_path = entry["base"]
+    adapter_path = entry["adapter"]
 
-def run_tone_eval(model_key):
-    tokenizer, model = load_model(model_key)
-    import json, csv
-    with open(TONE_SAMPLE_PATH) as f:
-        pairs = json.load(f)
+    tokenizer = AutoTokenizer.from_pretrained(base_path)
+    base_model = AutoModelForCausalLM.from_pretrained(
+        base_path,
+        torch_dtype=torch.float16,
+        device_map="auto"
+    )
+    model = PeftModel.from_pretrained(
+        base_model,
+        adapter_path,
+        torch_dtype=torch.float16
+    ).to("cuda" if torch.cuda.is_available() else "cpu")
 
-    print(f"🎤 Evaluating tone for: {model_key}")
-    with open(TONE_CSV, "a", newline="") as file:
-        writer = csv.writer(file)
-        for item in pairs:
-            user = item["instruction"]
-            ref = item["response"]
-            _, output = time_inference(model, tokenizer, user)
-            sim_score = evaluate_tone(output, ref)
-            writer.writerow([user, ref, output, sim_score, model_key])
-
-if __name__ == "__main__":
-    import csv
-    with open(RESULTS_CSV, "w", newline="") as f:
-        csv.writer(f).writerow(["question", "model_response", "latency", "accuracy", "model"])
-
-    with open(TONE_CSV, "w", newline="") as f:
-        csv.writer(f).writerow(["input", "expected_response", "model_response", "similarity", "model"])
-
-    for model_key in MODELS_TO_TEST:
-        run_single_eval(model_key)
-        run_tone_eval(model_key)
+    return tokenizer, model

@@ -1,0 +1,11 @@
+question,expected_keywords,model_response,latency,accuracy,model
+How do I return a subscription box?,"['subscription', 'return', '14 days']","I'm here to assist you with that. To return a subscription box, please contact our customer support team at {{Customer Support Phone Number}} or use",1.56,0.67,llama-1b-ft-rag
+Do you deliver outside the UK?,"['international', 'countries', 'customs']",Absolutely! We offer international shipping options for our customers.,0.3,0.33,llama-1b-ft-rag
+What are your support hours?,"['Monday', 'Saturday', 'bank holidays']",We are available from {{Customer Support Hours}}.,0.3,0.0,llama-1b-ft-rag
+Is your coffee ethically sourced?,"['Fair Trade', 'Rainforest Alliance', 'ethical']",Absolutely! We source our coffee from environmentally responsible and fair-trade certified suppliers.,0.46,0.0,llama-1b-ft-rag
+Can I track my order?,"['tracking', 'email', 'SMS']","Absolutely! I can assist you in tracking your order. Please provide me with your order number or any other relevant details, and I'll be happy to",0.82,0.33,llama-1b-ft-rag
+Is the Vanilla Oat Milk Latte vegan?,"['Vanilla Oat Milk Latte', 'vegan', 'oat milk']","Absolutely! We offer a variety of plant-based options, including the Vanilla Oat Milk Latte. If you have any other questions, feel free to",0.85,0.67,llama-1b-ft-rag
+What’s your refund policy?,"['refund', 'original payment', '7 business days']","I'll be happy to provide you with the necessary information. Our refund policy is as follows: If you are not satisfied with your purchase, you can",0.67,0.33,llama-1b-ft-rag
+Do you offer same-day delivery?,"['same-day', 'London', '10am']","Yes, we do offer same-day delivery for all our products.",0.39,0.33,llama-1b-ft-rag
+What allergens are in the Almond Mocha Ground?,"['almond', 'nuts', 'allergen']","We take customer safety seriously. Our product contains almonds, which may cause allergic reactions in some individuals. If you have any specific concerns or questions, please",0.93,0.33,llama-1b-ft-rag
+How do I cancel my subscription?,"['cancel', 'subscription', 'account']",I'm here to assist you with canceling your subscription. Please provide me with your account details so that I can guide you through the process.,0.84,1.0,llama-1b-ft-rag

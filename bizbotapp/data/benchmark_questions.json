@@ -1,0 +1,43 @@
+[
+    {
+      "question": "What kind of packaging do you use?",
+      "expected_keywords": ["recyclable", "compostable", "packaging"]
+    },
+    {
+      "question": "Are your coffee pods eco-friendly?",
+      "expected_keywords": ["compostable", "pods", "sustainable"]
+    },
+    {
+      "question": "How do you ensure ethical sourcing?",
+      "expected_keywords": ["Fair Trade", "Rainforest Alliance", "audits"]
+    },
+    {
+      "question": "Do you source coffee from women-led cooperatives?",
+      "expected_keywords": ["women-led", "cooperatives", "sourcing"]
+    },
+    {
+      "question": "Where are your coffee beans grown?",
+      "expected_keywords": ["Brazil", "Ethiopia", "Kenya", "Colombia"]
+    },
+    {
+      "question": "How can I check the origin of my coffee?",
+      "expected_keywords": ["traceability", "QR codes", "ingredient origin"]
+    },
+    {
+      "question": "What does your Net Zero roadmap look like?",
+      "expected_keywords": ["Net Zero", "roadmap", "carbon-neutral"]
+    },
+    {
+      "question": "What do you do for local communities?",
+      "expected_keywords": ["clean water", "education", "renewable energy"]
+    },
+    {
+      "question": "How can I dispose of your packaging?",
+      "expected_keywords": ["disposal guide", "packaging", "compostable"]
+    },
+    {
+      "question": "Where can I learn more about your sustainability initiatives?",
+      "expected_keywords": ["sustainability", "reports", "brewbeans.co.uk"]
+    }
+  ]
+  

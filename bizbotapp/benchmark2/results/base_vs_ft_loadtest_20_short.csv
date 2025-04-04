@@ -1,3 +1,0 @@
-avg_latency,failures,successes,concurrency,cpu_percent,ram_percent,vram_used_MB,vram_total_MB,vram_percent,model,max_tokens
-145.88,0,20,20,0.0,18.5,2642.02,6441.93,41.01,llama-1b-base-short,30
-241.13,0,20,20,0.5,35.8,2642.02,6441.93,41.01,llama-1b-ft-short,30

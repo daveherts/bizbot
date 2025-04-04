@@ -1,3 +1,0 @@
-avg_latency,failures,successes,concurrency,cpu_percent,ram_percent,vram_used_MB,vram_total_MB,vram_percent,model
-380.99,0,50,50,0.0,18.9,2897.61,6441.93,44.98,llama-1b-base
-612.25,0,50,50,7.5,43.6,2897.61,6441.93,44.98,llama-1b-ft

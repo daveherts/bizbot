@@ -7,9 +7,10 @@ from langchain_chroma import Chroma
 # === Path configuration ===
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-RAG_DB_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "..", "vector_store", "chroma_db"))
-BASE_MODEL_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "..", "models", "base", "Llama-3.2-1B-Instruct"))
-ADAPTER_PATH = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "..", "models", "adapters", "llamaft", "checkpoint-20154"))
+# These are relative to: ~/bb/bizbotapp/
+RAG_DB_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "vector_store", "chroma_db"))
+BASE_MODEL_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "models", "base", "Llama-3.2-1B-Instruct"))
+ADAPTER_PATH = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "models", "adapters", "llamaft", "checkpoint-20154"))
 
 # === Load embedding model and Chroma vector store ===
 embed_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")

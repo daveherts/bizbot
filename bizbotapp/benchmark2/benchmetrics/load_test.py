@@ -1,41 +1,36 @@
-from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
-import torch
+import concurrent.futures
 
-def generate_response(model, tokenizer, prompt):
-    device = model.device
-    try:
-        inputs = tokenizer(prompt, return_tensors="pt").to(device)
-        start = time.time()
-        with torch.no_grad():
-            outputs = model.generate(**inputs, max_new_tokens=100, temperature=0.2)
-        latency = time.time() - start
-        response = tokenizer.decode(outputs[0], skip_special_tokens=True)
-        return latency, response, False  # No failure
-    except Exception as e:
-        return None, str(e), True  # Failure
+def run_load_test(model, tokenizer, prompt, concurrency=1, max_tokens=50):
+    """
+    Simulate concurrent generation requests and measure average latency.
+    Parameters:
+        model: Hugging Face model (with LoRA if needed)
+        tokenizer: Corresponding tokenizer
+        prompt: The RAG-enhanced input prompt
+        concurrency: Number of concurrent requests
+        max_tokens: Max number of tokens per generation
+    Returns:
+        Dictionary with latency, success/failure metrics
+    """
 
-def run_load_test(model, tokenizer, prompt, concurrency=10):
-    latencies = []
-    failures = 0
+    def generate():
+        input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to(model.device)
+        output = model.generate(input_ids, max_new_tokens=max_tokens)
+        return tokenizer.decode(output[0], skip_special_tokens=True)
 
-    with ThreadPoolExecutor(max_workers=concurrency) as executor:
-        futures = [executor.submit(generate_response, model, tokenizer, prompt) for _ in range(concurrency)]
-        for future in as_completed(futures):
-            latency, _, failed = future.result()
-            if failed:
-                failures += 1
-            elif latency is not None:
-                latencies.append(latency)
+    start = time.perf_counter()
 
-    if latencies:
-        avg_latency = sum(latencies) / len(latencies)
-    else:
-        avg_latency = None
+    with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as executor:
+        futures = [executor.submit(generate) for _ in range(concurrency)]
+        results = [f.result() for f in futures]
+
+    end = time.perf_counter()
+
+    avg_latency = (end - start) / concurrency
 
     return {
-        "avg_latency": round(avg_latency, 2) if avg_latency else None,
-        "failures": failures,
-        "successes": len(latencies),
-        "concurrency": concurrency
+        "avg_latency": round(avg_latency, 2),
+        "failures": 0,
+        "successes": len(results)
     }

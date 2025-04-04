@@ -1,0 +1,2 @@
+avg_latency,failures,successes,cpu_percent,ram_percent,vram_used_MB,vram_total_MB,vram_percent,model,concurrency,max_tokens
+2.48,0,10,0.2,23.3,2660.66,6441.93,41.3,llama-1b-ft-rag,10,30

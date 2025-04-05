@@ -1,29 +1,16 @@
-# ingestion/document_loader.py
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.document_loaders import TextLoader
+from langchain.schema.document import Document
 
 import os
-import fitz  # PyMuPDF
 
-def load_document(path: str) -> str:
-    ext = os.path.splitext(path)[-1].lower()
+def load_document(path: str) -> list[Document]:
+    loader = TextLoader(path, encoding="utf-8")
+    docs = loader.load()
 
-    try:
-        if ext in [".txt", ".md"]:
-            with open(path, "r", encoding="utf-8") as f:
-                return f.read()
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=512,
+        chunk_overlap=64,
+    )
 
-        elif ext == ".pdf":
-            return extract_text_from_pdf(path)
-
-    except Exception as e:
-        print(f"⚠️ Failed to load {path}: {e}")
-        return ""
-
-    return ""
-
-def extract_text_from_pdf(path: str) -> str:
-    doc = fitz.open(path)
-    text = ""
-    for page in doc:
-        text += page.get_text()
-    doc.close()
-    return text
+    return splitter.split_documents(docs)

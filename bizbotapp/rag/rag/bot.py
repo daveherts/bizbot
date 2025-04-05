@@ -14,12 +14,18 @@ class BizBot:
     def __init__(self):
         self.embedder = SentenceTransformer("all-MiniLM-L6-v2")
         self.tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL_PATH)
+
         base_model = AutoModelForCausalLM.from_pretrained(
             BASE_MODEL_PATH,
-            torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32
+            torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+            device_map="auto"
         )
+
         self.model = PeftModel.from_pretrained(base_model, ADAPTER_PATH)
+        self.model.to("cuda" if torch.cuda.is_available() else "cpu")
         self.model.eval()
+
+        print("🧠 Model loaded on:", self.model.device)
 
         client = PersistentClient(path=CHROMA_DB_PATH)
         self.collection = client.get_or_create_collection("company_docs")
@@ -27,7 +33,9 @@ class BizBot:
     def answer(self, query: str, n_results: int = 3) -> str:
         print("🔍 Embedding query and retrieving documents...")
         results = self.collection.query(query_texts=[query], n_results=n_results)
-        context = "\n".join(results["documents"][0]) if results["documents"] and results["documents"][0] else ""
+        context = "\n".join(results["documents"][0]) if results["documents"] else ""
+
+        print("📄 Retrieved context:\n", context)
 
         prompt = format_prompt(query, context)
         inputs = self.tokenizer(prompt, return_tensors="pt").to(self.model.device)

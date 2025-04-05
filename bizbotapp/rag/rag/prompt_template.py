@@ -1,23 +1,13 @@
+# rag/prompt_template.py
+
 def format_prompt(query: str, context: str = "") -> str:
-    """
-    Format the input prompt to include retrieved context, if available.
-    If no context is retrieved, fall back to a generic answer style.
-    """
-    if context:
-        return f"""
-        Answer the following question using only the information from the context below.
-        If the answer is not in the context, reply with "I'm sorry, I don't have that information.".
+    return f"""You are BizBot, a helpful assistant for BrewBeans customers.
 
-        Context:
-        {context}
+Use the following context to answer the customer's question in **20 words or fewer**.
+If the context does not contain the answer, say: "I'm sorry, I don't have that information."
 
-        Question: {query}
-        Answer:
-        """
-    else:
-        return f"""
-        Answer the following question as best as you can.
+Context:
+{context}
 
-        Question: {query}
-        Answer:
-        """
+Question: {query}
+Answer:"""

@@ -1,3 +1,5 @@
+# admin/vector_inspector.py
+
 import os
 from chromadb import PersistentClient
 
@@ -16,7 +18,8 @@ def list_docs():
 def clear_docs():
     confirm = input("⚠️ Are you sure you want to delete all documents? (yes/no): ")
     if confirm.lower() == "yes":
-        collection.delete(where={})
+        all_ids = [doc_id for doc_id in collection.get()['ids']]
+        collection.delete(ids=all_ids)
         print("✅ All documents deleted.")
     else:
         print("❌ Deletion cancelled.")

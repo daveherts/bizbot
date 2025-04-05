@@ -1,9 +1,7 @@
-# rag/admin/vector_inspector.py
-
 import os
 from chromadb import PersistentClient
 
-VECTOR_STORE_PATH = os.path.expanduser("~/bb/bizbotapp/scripts/vector_store/chroma_db")
+VECTOR_STORE_PATH = os.path.expanduser("~/bb/bizbotapp/rag/vector_store/chroma_db")
 client = PersistentClient(path=VECTOR_STORE_PATH)
 collection = client.get_or_create_collection("company_docs")
 

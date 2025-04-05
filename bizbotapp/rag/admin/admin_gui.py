@@ -1,5 +1,3 @@
-# rag/admin/admin_gui.py
-
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
@@ -8,7 +6,7 @@ import gradio as gr
 from rag.ingestion.ingest_from_files import ingest_documents
 from chromadb import PersistentClient
 
-VECTOR_STORE_PATH = os.path.expanduser("~/bb/bizbotapp/scripts/vector_store/chroma_db")
+VECTOR_STORE_PATH = os.path.expanduser("~/bb/bizbotapp/rag/vector_store/chroma_db")
 DOCUMENTS_DIR = os.path.expanduser("~/bb/bizbotapp/company_docs")
 client = PersistentClient(path=VECTOR_STORE_PATH)
 collection = client.get_or_create_collection("company_docs")

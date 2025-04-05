@@ -48,7 +48,7 @@
       ]
     },
     {
-      "question": "What\u2019s your refund policy?",
+      "question": "What is your refund policy?",
       "expected_keywords": [
         "refund",
         "original payment",

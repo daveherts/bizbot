@@ -1,169 +1,78 @@
 import os
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from peft import PeftModel
-import chromadb
-from sentence_transformers import SentenceTransformer
 import gradio as gr
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from peft import PeftModel
+from sentence_transformers import SentenceTransformer
+import chromadb
 
-# ========================
-# Path Setup
-# ========================
+# --- Configurable Paths ---
+BASE_MODEL_PATH = os.path.expanduser("~/bb/bizbotapp/scripts/models/base/Llama-3.2-1B-Instruct")
+ADAPTER_PATH = os.path.expanduser("~/bb/bizbotapp/models/adapters/llamaft")
+CHROMA_DB_PATH = os.path.expanduser("~/bb/bizbotapp/scripts/vector_store/chroma_db")
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
+# --- Global vars ---
+tokenizer = None
+model = None
+embedder = None
+collection = None
 
-MODEL_DIR = os.path.join(PROJECT_ROOT, "models")
-BASE_MODEL_PATH = os.path.join(MODEL_DIR, "base", "Llama-3.2-1B-Instruct")
-ADAPTER_PATH = os.path.join(MODEL_DIR, "adapters", "llamaft", "checkpoint-20154")
-VECTOR_DB_DIR = os.path.join(PROJECT_ROOT, "vector_store", "chroma_db")
+# --- Load Embedder ---
+def load_embedder():
+    global embedder
+    print("Loading Sentence Transformer model...")
+    embedder = SentenceTransformer('all-MiniLM-L6-v2')
+    print("Embedder loaded.")
 
-# ========================
-# Device Setup
-# ========================
+# --- Load Vector DB ---
+def init_vector_store():
+    global collection
+    print(f"Initializing ChromaDB client at: {CHROMA_DB_PATH}")
+    client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
+    print("Getting or creating collection: company_docs")
+    collection = client.get_or_create_collection(name="company_docs")
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
-
-# ========================
-# Global State
-# ========================
-
-current_model = None
-current_tokenizer = None
-conversation_history = []
-
-INSTRUCTIONS = (
-    "You are a helpful customer service assistant for BrewBeans Co. "
-    "Use the provided company information where possible to answer questions clearly and accurately."
-)
-MAX_TOKENS = 100
-TEMPERATURE = 0.22
-
-# ========================
-# Setup: ChromaDB + Embedder
-# ========================
-
-client = chromadb.PersistentClient(path=VECTOR_DB_DIR)
-collection = client.get_or_create_collection(name="company_docs")
-embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-
-# ========================
-# Model Handling
-# ========================
-
-def ensure_base_model():
-    if not os.path.exists(BASE_MODEL_PATH):
-        print("Base model not found. Downloading...")
-        os.makedirs(BASE_MODEL_PATH, exist_ok=True)
-        tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-1B-Instruct")
-        model = AutoModelForCausalLM.from_pretrained(
-            "meta-llama/Llama-3.2-1B-Instruct",
-            torch_dtype=torch.float16
-        )
-        tokenizer.save_pretrained(BASE_MODEL_PATH)
-        model.save_pretrained(BASE_MODEL_PATH)
-        print("Base model downloaded.")
-    else:
-        print("Base model found locally.")
-
-def clear_model():
-    global current_model, current_tokenizer
-    if current_model:
-        del current_model
-        del current_tokenizer
-        torch.cuda.empty_cache()
-        current_model, current_tokenizer = None, None
-
+# --- Load LLM + Adapter ---
 def load_bizbot():
-    global current_model, current_tokenizer
-    clear_model()
-    ensure_base_model()
+    global tokenizer, model
 
-    current_tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL_PATH, local_files_only=True)
+    print("Loading tokenizer from:", BASE_MODEL_PATH)
+    tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL_PATH)
 
-    base_model = AutoModelForCausalLM.from_pretrained(
-        BASE_MODEL_PATH,
-        local_files_only=True,
-        torch_dtype=torch.float16,
-        device_map="auto"
-    )
+    print("Loading base model from:", BASE_MODEL_PATH)
+    base_model = AutoModelForCausalLM.from_pretrained(BASE_MODEL_PATH, torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32)
 
-    current_model = PeftModel.from_pretrained(
-        base_model,
-        ADAPTER_PATH,
-        local_files_only=True,
-        torch_dtype=torch.float16
-    ).to(device)
+    print("Loading PEFT adapter from:", ADAPTER_PATH)
+    model = PeftModel.from_pretrained(base_model, ADAPTER_PATH)
+    print("Model with adapter loaded.")
 
-    return "✅ BizBot fine-tuned model with RAG loaded."
+# --- Answering logic ---
+def answer_question(query):
+    print("Embedding query for retrieval...")
+    embedded = embedder.encode([query])
+    print("Query embedded. Fetching relevant documents...")
+    results = collection.query(query_texts=[query], n_results=3)
+    print("ChromaDB results:", results)
+    context = "\n".join(results['documents'][0]) if results['documents'] else ""
 
-# ========================
-# RAG Context Retrieval
-# ========================
+    prompt = f"Answer the following question based on the provided context:\nContext: {context}\n\nQuestion: {query}\nAnswer:"
+    inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+    output = model.generate(**inputs, max_new_tokens=256)
+    answer = tokenizer.decode(output[0], skip_special_tokens=True)
 
-def retrieve_context(query, top_k=3):
-    query_embedding = embedder.encode(query).tolist()
-    results = collection.query(query_embeddings=[query_embedding], n_results=top_k)
-    chunks = results.get("documents", [[]])[0]
-    if chunks:
-        print("\n🔎 Retrieved RAG context:")
-        for i, chunk in enumerate(chunks):
-            print(f"Chunk {i+1}: {chunk}\n")
-    return "\n".join(chunks) if chunks else ""
+    return answer.split("Answer:")[-1].strip()
 
-# ========================
-# Chat Logic
-# ========================
+# --- Launch Gradio UI ---
+def launch_gradio():
+    iface = gr.Interface(fn=answer_question, 
+                         inputs=gr.Textbox(lines=2, label="Ask BizBot a question"),
+                         outputs="text")
+    iface.launch()
 
-def chat(user_input):
-    global conversation_history
-
-    if current_model is None or current_tokenizer is None:
-        return "Model not loaded, please reload."
-
-    rag_context = retrieve_context(user_input)
-
-    conversation_history.append(f"User: {user_input}")
-    formatted_input = (
-        f"System: {INSTRUCTIONS}\n\n"
-        f"Relevant company documentation to help answer this question:\n\n"
-        f"{rag_context}\n\n"
-        + "\n".join(conversation_history)
-        + f"\n\nAssistant:"
-    )
-
-    inputs = current_tokenizer(formatted_input, return_tensors="pt").to(device)
-
-    with torch.no_grad():
-        outputs = current_model.generate(
-            **inputs,
-            max_new_tokens=MAX_TOKENS,
-            temperature=TEMPERATURE
-        )
-
-    response = current_tokenizer.decode(outputs[0], skip_special_tokens=True)
-    response = response.split("Assistant:")[-1].strip()
-
-    conversation_history.append(f"Assistant: {response}")
-
-    return response
-
-# ========================
-# Launch Gradio App
-# ========================
-
-load_bizbot()
-
-with gr.Blocks() as demo:
-    gr.Markdown("# 🤖 BizBot RAG Chatbot")
-
-    user_input = gr.Textbox(label="Ask BizBot a question")
-    response_box = gr.Textbox(label="Response", interactive=False)
-
-    submit_button = gr.Button("Submit")
-    clear_chat_button = gr.Button("Clear Chat History")
-
-    submit_button.click(chat, inputs=user_input, outputs=response_box)
-    clear_chat_button.click(lambda: conversation_history.clear() or "", outputs=response_box)
-
-demo.launch()
+# --- Main logic ---
+if __name__ == "__main__":
+    print("Using device:", "cuda" if torch.cuda.is_available() else "cpu")
+    load_embedder()
+    init_vector_store()
+    load_bizbot()
+    launch_gradio()

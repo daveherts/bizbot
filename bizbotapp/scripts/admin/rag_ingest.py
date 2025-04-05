@@ -12,7 +12,9 @@ VECTOR_DB_DIR = os.path.join(PROJECT_ROOT, "vector_store", "chroma_db")
 
 # === Setup ChromaDB and Embedder ===
 embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=500, chunk_overlap=50, separators=["\n\n", "\n", ".", " ", ""]
+)
 
 client = chromadb.PersistentClient(path=VECTOR_DB_DIR)
 collection = client.get_or_create_collection(name="company_docs")
@@ -31,16 +33,36 @@ def ingest_documents():
             with open(filepath, "r", encoding="utf-8") as f:
                 content = f.read()
 
-            chunks = text_splitter.split_text(content)
-            for i, chunk in enumerate(chunks):
-                embedding = embedder.encode(chunk).tolist()
-                collection.add(
-                    documents=[chunk],
-                    embeddings=[embedding],
-                    ids=[f"{filename}-{i}"],
-                    metadatas=[{"source": filename}]
-                )
-            new_chunks_count += len(chunks)
+            # 🧹 Basic cleaning
+            content = content.strip().replace("\r\n", "\n")
 
-    print(f"✅ Ingested {new_chunks_count} new chunks.")
+            # 🔪 Split content into chunks
+            chunks = text_splitter.split_text(content)
+
+            print(f"\n📄 {filename} → {len(chunks)} chunks")
+
+            for i, chunk in enumerate(chunks):
+                chunk_id = f"{filename}-{i}"
+                embedding = embedder.encode(chunk).tolist()
+
+                try:
+                    collection.add(
+                        documents=[chunk],
+                        embeddings=[embedding],
+                        ids=[chunk_id],
+                        metadatas=[{
+                            "source": filename,
+                            "chunk_index": i
+                        }]
+                    )
+                    new_chunks_count += 1
+                except chromadb.errors.IDAlreadyExistsError:
+                    print(f"⏭️ Skipping duplicate chunk ID: {chunk_id}")
+                    continue
+
+    print(f"\n✅ Ingested {new_chunks_count} new chunks.")
     return new_chunks_count
+
+# Optional: Run directly
+if __name__ == "__main__":
+    ingest_documents()

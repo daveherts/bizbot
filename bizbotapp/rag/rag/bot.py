@@ -1,12 +1,12 @@
-# rag/bot.py
-
 import os
 import torch
+import difflib
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import PeftModel
 from sentence_transformers import SentenceTransformer
 from chromadb import PersistentClient
-from rag.prompt_template import format_prompt
+from rag.rag.prompt_template import format_prompt
+
 
 CHROMA_DB_PATH = os.path.expanduser("~/bb/bizbotapp/rag/vector_store/chroma_db")
 BASE_MODEL_PATH = os.path.expanduser("~/bb/bizbotapp/models/base/Llama-3.2-1B-Instruct")
@@ -55,16 +55,25 @@ class BizBot:
                         current_q, current_a = None, None
         return pairs
 
-    def check_exact_match(self, query):
+    def check_exact_match(self, query, threshold=0.9):
         query_lower = query.strip().lower()
-        for q, a in self.qna_pairs:
-            if q == query_lower:
-                print("✅ Exact match found in Q&A file.")
-                return a
+        questions = [q for q, _ in self.qna_pairs]
+
+        # Use difflib to find the closest match
+        matches = difflib.get_close_matches(query_lower, questions, n=1, cutoff=threshold)
+
+        if matches:
+            best_match = matches[0]
+            for q, a in self.qna_pairs:
+                if q == best_match:
+                    print(f"✅ Fuzzy Q&A match found: '{best_match}' for input '{query}'")
+                    return a
+
+        print(f"❌ No Q&A match (≥{threshold * 100:.0f}%) for: '{query}'")
         return None
 
     def answer(self, query: str) -> str:
-        # Step 1: Exact Q&A match
+        # Step 1: Exact or fuzzy Q&A match
         match = self.check_exact_match(query)
         if match:
             return match
@@ -81,8 +90,8 @@ class BizBot:
         outputs = self.model.generate(
             **inputs,
             max_new_tokens=128,
-            do_sample=True,
-            temperature=0.0,
+            do_sample=False,                 # ✅ deterministic, safe for temperature=0.0
+            temperature=0.0,                 # ✅ avoids runtime error
             top_p=0.95,
             pad_token_id=self.tokenizer.eos_token_id
         )

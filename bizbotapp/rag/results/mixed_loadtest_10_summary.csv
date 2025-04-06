@@ -1,2 +1,0 @@
-concurrency,avg_latency,p95_latency,max_latency,cpu_percent,ram_used_gb,gpu_percent,gpu_memory_used_gb
-10,4.08,9.4,9.32,0.4,3.06,,

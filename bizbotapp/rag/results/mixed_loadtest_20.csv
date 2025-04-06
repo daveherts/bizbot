@@ -1,0 +1,21 @@
+question,expected_keywords,model_response,latency,accuracy,model
+What’s your most popular blend right now?,[],Our top-selling coffee blend is the Java Jolt. It contains a balanced mix of Arabica and Robusta beans.,20.978,0.0,bizbot-llama1b-ft-rag
+What’s your most popular blend right now?,[],Our top-selling coffee blend is the Java Jolt. It contains a balanced mix of Arabica and Robusta beans.,20.787,0.0,bizbot-llama1b-ft-rag
+Are there any barista tips for making the perfect oat latte?,[],"Yes! To make the perfect oat latte, use 1/2 cup of unsweetened almond milk, 1/2 cup of vanilla extract, and 1/2 cup of oat milk. Adjust to taste.",25.583,0.0,bizbot-llama1b-ft-rag
+What allergens are in the Almond Mocha Ground?,"['almond', 'nuts', 'allergen']",It contains almond extract and is labeled with nuts as an allergen.,0.002,1.0,bizbot-llama1b-ft-rag
+What’s your most popular blend right now?,[],Our top-selling coffee blend is the Java Jolt. It contains a balanced mix of Arabica and Robusta beans.,20.955,0.0,bizbot-llama1b-ft-rag
+Are there any barista tips for making the perfect oat latte?,[],"Yes! To make the perfect oat latte, use 1/2 cup of unsweetened almond milk, 1/2 cup of vanilla extract, and 1/2 cup of oat milk. Adjust to taste.",25.62,0.0,bizbot-llama1b-ft-rag
+How do I return a subscription box?,"['subscription', 'return', '14 days']",Unopened subscription boxes can be returned within 14 days for a refund. Cancel anytime via your BrewBeans account.,0.014,1.0,bizbot-llama1b-ft-rag
+Can I track my order?,"['tracking', 'email', 'SMS']","Yes. You'll receive tracking links by email and SMS for dispatch, in-transit, and delivery updates.",0.011,1.0,bizbot-llama1b-ft-rag
+Is the Vanilla Oat Milk Latte vegan?,"['Vanilla Oat Milk Latte', 'vegan', 'oat milk']","Yes. It contains Arabica, oat milk, and vanilla extract. Suitable for vegans.",0.018,0.67,bizbot-llama1b-ft-rag
+Do you deliver outside the UK?,"['international', 'countries', 'customs']","Yes. We deliver to Ireland, France, Germany, Netherlands, Italy, USA, Canada, and Australia. Customs may apply.",0.033,0.33,bizbot-llama1b-ft-rag
+How do I return a subscription box?,"['subscription', 'return', '14 days']",Unopened subscription boxes can be returned within 14 days for a refund. Cancel anytime via your BrewBeans account.,0.014,1.0,bizbot-llama1b-ft-rag
+What’s your most popular blend right now?,[],Our top-selling coffee blend is the Java Jolt. It contains a balanced mix of Arabica and Robusta beans.,20.971,0.0,bizbot-llama1b-ft-rag
+Can I track my order?,"['tracking', 'email', 'SMS']","Yes. You'll receive tracking links by email and SMS for dispatch, in-transit, and delivery updates.",0.017,1.0,bizbot-llama1b-ft-rag
+Can I change my subscription frequency anytime?,[],Yes. You can adjust delivery dates and frequency in your account.,12.474,0.0,bizbot-llama1b-ft-rag
+What’s your most popular blend right now?,[],Our top-selling coffee blend is the Java Jolt. It contains a balanced mix of Arabica and Robusta beans.,20.942,0.0,bizbot-llama1b-ft-rag
+Can I track my order?,"['tracking', 'email', 'SMS']","Yes. You'll receive tracking links by email and SMS for dispatch, in-transit, and delivery updates.",0.024,1.0,bizbot-llama1b-ft-rag
+Are there any barista tips for making the perfect oat latte?,[],"Yes! To make the perfect oat latte, use 1/2 cup of unsweetened almond milk, 1/2 cup of vanilla extract, and 1/2 cup of oat milk. Adjust to taste.",25.657,0.0,bizbot-llama1b-ft-rag
+Do you deliver outside the UK?,"['international', 'countries', 'customs']","Yes. We deliver to Ireland, France, Germany, Netherlands, Italy, USA, Canada, and Australia. Customs may apply.",0.004,0.33,bizbot-llama1b-ft-rag
+Are there any barista tips for making the perfect oat latte?,[],"Yes! To make the perfect oat latte, use 1/2 cup of unsweetened almond milk, 1/2 cup of vanilla extract, and 1/2 cup of oat milk. Adjust to taste.",25.578,0.0,bizbot-llama1b-ft-rag
+Do you offer same-day delivery?,"['same-day', 'London', '10am']",Yes. Same-day delivery is available in Greater London Zones 1–3 if ordered by 10am.,0.018,1.0,bizbot-llama1b-ft-rag

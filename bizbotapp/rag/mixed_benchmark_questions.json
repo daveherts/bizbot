@@ -1,0 +1,43 @@
+[
+    {
+      "question": "How do I return a subscription box?",
+      "expected_keywords": ["subscription", "return", "14 days"]
+    },
+    {
+      "question": "Do you deliver outside the UK?",
+      "expected_keywords": ["international", "countries", "customs"]
+    },
+    {
+      "question": "How does your loyalty program work?",
+      "expected_keywords": []
+    },
+    {
+      "question": "Can I track my order?",
+      "expected_keywords": ["tracking", "email", "SMS"]
+    },
+    {
+      "question": "Are there any barista tips for making the perfect oat latte?",
+      "expected_keywords": []
+    },
+    {
+      "question": "What allergens are in the Almond Mocha Ground?",
+      "expected_keywords": ["almond", "nuts", "allergen"]
+    },
+    {
+      "question": "Do you offer same-day delivery?",
+      "expected_keywords": ["same-day", "London", "10am"]
+    },
+    {
+      "question": "What’s your most popular blend right now?",
+      "expected_keywords": []
+    },
+    {
+      "question": "Is the Vanilla Oat Milk Latte vegan?",
+      "expected_keywords": ["Vanilla Oat Milk Latte", "vegan", "oat milk"]
+    },
+    {
+      "question": "Can I change my subscription frequency anytime?",
+      "expected_keywords": []
+    }
+  ]
+  

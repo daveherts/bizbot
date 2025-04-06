@@ -1,13 +1,19 @@
 import sys
 import os
+import shutil
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 import gradio as gr
 from rag.ingestion.ingest_from_files import ingest_documents
 from chromadb import PersistentClient
 
+# Paths
 VECTOR_STORE_PATH = os.path.expanduser("~/bb/bizbotapp/rag/vector_store/chroma_db")
 DOCUMENTS_DIR = os.path.expanduser("~/bb/bizbotapp/company_docs")
+FAQ_COPY_PATH = os.path.expanduser("~/bb/bizbotapp/rag/faq_pairs.txt")
+
+# Vector DB connection
 client = PersistentClient(path=VECTOR_STORE_PATH)
 collection = client.get_or_create_collection("company_docs")
 
@@ -36,8 +42,24 @@ def delete_docs():
     collection.delete(ids=all_ids)
     return "✅ All documents deleted."
 
+def handle_upload(file):
+    if file is None:
+        return "❌ No file uploaded."
+
+    filename = os.path.basename(file.name)
+    dest_path = os.path.join(DOCUMENTS_DIR, filename)
+    shutil.move(file.name, dest_path)
+
+    # Copy FAQ file if detected
+    if "faq" in filename.lower() and filename.endswith(".txt"):
+        shutil.copy(dest_path, FAQ_COPY_PATH)
+        return f"✅ Uploaded and copied to RAG FAQ: {filename}"
+    else:
+        return f"✅ Uploaded: {filename}"
+
+# UI
 with gr.Blocks(title="BizBot Admin Panel") as admin_ui:
-    gr.Markdown("📁 **BizBot Admin Panel**")
+    gr.Markdown("## BizBot Admin Panel")
 
     with gr.Row():
         file_upload = gr.File(label="Upload document", file_types=[".txt", ".pdf", ".md"])
@@ -55,14 +77,7 @@ with gr.Blocks(title="BizBot Admin Panel") as admin_ui:
         delete_button = gr.Button("Delete All Documents")
         delete_status = gr.Textbox(label="Deletion Status")
 
-    def handle_upload(file):
-        if file is None:
-            return "❌ No file uploaded."
-        filename = os.path.basename(file.name)
-        dest = os.path.join(DOCUMENTS_DIR, filename)
-        os.rename(file.name, dest)
-        return f"✅ Uploaded: {filename}"
-
+    # Bind actions
     file_upload.change(fn=handle_upload, inputs=file_upload, outputs=upload_status)
     ingest_button.click(fn=run_ingestion, outputs=ingestion_status)
     list_button.click(fn=list_docs, outputs=list_output)

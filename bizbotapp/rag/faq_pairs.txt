@@ -1,0 +1,205 @@
+# BrewBeans RAG Q&A Set – 100 Questions
+
+Q: How do I return a subscription box?
+A: Unopened subscription boxes can be returned within 14 days for a refund. Cancel anytime via your BrewBeans account.
+
+Q: Do you deliver outside the UK?
+A: Yes. We deliver to Ireland, France, Germany, Netherlands, Italy, USA, Canada, and Australia. Customs may apply.
+
+Q: What are your support hours?
+A: Support is available Mon–Fri 08:00–20:00, Sat 09:00–17:00 GMT. Closed on UK bank holidays.
+
+Q: Is your coffee ethically sourced?
+A: Yes. All beans are Fair Trade or Rainforest Alliance certified from ethical farms in Brazil, Ethiopia, Kenya, and Colombia.
+
+Q: Can I track my order?
+A: Yes. You'll receive tracking links by email and SMS for dispatch, in-transit, and delivery updates.
+
+Q: Is the Vanilla Oat Milk Latte vegan?
+A: Yes. It contains Arabica, oat milk, and vanilla extract. Suitable for vegans.
+
+Q: What’s your refund policy?
+A: Unopened products are refundable within 30 days. Refunds go to the original payment method in 5–7 business days.
+
+Q: Do you offer same-day delivery?
+A: Yes. Same-day delivery is available in Greater London Zones 1–3 if ordered by 10am.
+
+Q: What allergens are in the Almond Mocha Ground?
+A: It contains almond extract and is labeled with nuts as an allergen.
+
+Q: How do I cancel my subscription?
+A: Log into your BrewBeans account to cancel your subscription anytime.
+
+Q: Can I return an opened item?
+A: Opened items can be returned for store credit only, not a full refund.
+
+Q: How long do refunds to PayPal take?
+A: Refunds to PayPal may take up to 10 business days after return verification.
+
+Q: Which items are non-returnable?
+A: Gift cards, final sale items, and opened perishables are not returnable.
+
+Q: Where can I drop off my return?
+A: Use a Royal Mail label and drop it at your nearest Post Office branch.
+
+Q: Which products are compostable?
+A: Pods and packaging will be 100% recyclable or compostable by 2026.
+
+Q: Do you offer in-store pickup?
+A: Yes. In-store pickup is available at Shoreditch and Manchester flagship stores.
+
+Q: What happens if my parcel is delayed?
+A: If tracking hasn't updated for 72+ hours, contact support. Replacements are issued in 48 hours.
+
+Q: How do I contact support?
+A: You can email, call, or chat. Email: support@brewbeans.co.uk | Phone: 020 8123 4567
+
+Q: Which languages are supported?
+A: Support is available in English, Welsh, Spanish, French, and German.
+
+Q: Are your beans traceable?
+A: Yes. Retail packaging includes QR codes for full traceability.
+
+Q: Can I return a gift?
+A: Yes, but you’ll receive store credit instead of a refund.
+
+Q: Is the Decaf House Blend caffeine-free?
+A: It has less than 5mg of caffeine using Swiss Water decaf.
+
+Q: Can I skip a subscription box?
+A: Yes. Manage your subscription via your BrewBeans account.
+
+Q: Can I change delivery frequency?
+A: Yes. You can adjust delivery dates and frequency in your account.
+
+Q: Can I reactivate my cancelled subscription?
+A: Yes. Simply log in and restart it from your account.
+
+Q: How do I dispose of BrewBeans pods?
+A: Visit our sustainability page for composting instructions.
+
+Q: Can I track my return status?
+A: Yes. You’ll receive email updates after we receive your return.
+
+Q: Are BrewBeans plastic-free?
+A: Our goal is 100% recyclable or compostable packaging by 2026.
+
+Q: Do you offer live chat?
+A: Yes. Live chat is available during support hours on our website.
+
+Q: Which product has the most caffeine?
+A: Morning Boost Pods contain 120mg of caffeine.
+
+Q: Is next-day delivery available?
+A: Yes. Next-day delivery UK-wide is available for £4.99.
+
+Q: How long do I have to return a product?
+A: You have 30 days from delivery to return unopened products.
+
+Q: Do you ship to the US?
+A: Yes, we ship to the USA with 7–10 day delivery.
+
+Q: Where do you source your beans?
+A: From certified farms in Brazil, Ethiopia, Kenya, and Colombia.
+
+Q: Which drinks are vegan-friendly?
+A: Vanilla Oat Milk Latte and Keto Espresso Shot are vegan.
+
+Q: What courier does BrewBeans use?
+A: We use Royal Mail and DPD for UK deliveries.
+
+Q: What’s the fastest way to get help?
+A: Tier 3 VIPs receive replies within 12 hours.
+
+Q: Are international returns free?
+A: No. International customers must pay for return shipping.
+
+Q: Do you support women-led farms?
+A: Yes. We prioritize sourcing from women-led cooperatives.
+
+Q: Do you offer free shipping?
+A: Yes. Orders over £50 qualify for free standard UK shipping.
+
+Q: Are BrewBeans drinks keto-friendly?
+A: Yes. Keto Espresso Shot is specifically designed for keto diets.
+
+Q: Do I need an account to place a one-time order?
+A: No. One-time purchases can be made without registering.
+
+Q: Do you support anonymous gift returns?
+A: Yes. Gift returns without sender details are processed for store credit.
+
+Q: When will all packaging be recyclable?
+A: Our goal is 100% recyclable or compostable packaging by 2026.
+
+Q: How do I skip my next subscription box?
+A: Log into your account and click 'Skip Next Delivery'.
+
+Q: Can I get a copy of my receipt?
+A: Yes. Email support@brewbeans.co.uk with your order ID.
+
+Q: Can I choose DPD instead of Royal Mail?
+A: Yes. Both courier options are available at checkout.
+
+Q: Will I be charged during a pause?
+A: No. Paused subscriptions do not generate charges.
+
+Q: Can I get help in Spanish?
+A: Yes. Support is available in Spanish, French, German, Welsh, and English.
+
+Q: Are you closed on holidays?
+A: Yes. Support is closed on all UK bank holidays.
+
+Q: Can I pause my subscription?
+A: Yes. Pause and resume your subscription anytime from your account.
+
+Q: How do I print a return label?
+A: Visit https://brewbeans.co.uk/returns to download a prepaid Royal Mail label.
+
+Q: How do I find product traceability info?
+A: Scan the QR code on packaging for full sourcing details.
+
+Q: What is the Holiday Hazelnut Roast?
+A: A seasonal blend with hazelnut oil, available for a limited time.
+
+Q: What are compostable pods?
+A: Pods made from biodegradable materials, safe for home composting.
+
+Q: Are product allergens clearly labeled?
+A: Yes. We label allergens like nuts and dairy on every product.
+
+Q: Can I return a subscription gift box?
+A: Yes, but only unopened gift boxes within 14 days for store credit.
+
+Q: When does same-day delivery arrive?
+A: Same-day deliveries in London Zones 1–3 arrive by evening if ordered before 10am.
+
+Q: Do I get confirmation after sending a return?
+A: Yes. You'll receive a confirmation email within 48 hours.
+
+Q: Can I exchange a defective item?
+A: Yes. Defective products can be exchanged within 14 days of delivery.
+
+Q: How do I manage my payment details?
+A: Update payment methods from the account billing section.
+
+Q: What’s the BizBot chatbot for?
+A: BizBot helps with FAQs, product queries, and return instructions 24/7.
+
+Q: Do international deliveries include VAT?
+A: EU orders include VAT. Non-EU orders may require customs fees.
+
+Q: What is the caffeine content of Nitro Cold Brew?
+A: It contains 80mg of caffeine per bottle.
+
+Q: Is in-store pickup free?
+A: Yes. Pickup is free at Shoreditch and Manchester locations.
+
+Q: Is proof of purchase required for returns?
+A: Yes. Provide your order ID or receipt when initiating a return.
+
+Q: Does the Caramel Cappuccino contain dairy?
+A: Yes. It includes dairy and caramel flavoring.
+
+Q: What percentage of profits go to sustainability?
+A: 3% of profits fund renewable energy, education, and clean water.

@@ -1,34 +1,24 @@
-# rag/admin_gui.py
-
 import gradio as gr
-from rag.bot import BizBot
+from rag.bot import BizBot  # ✅ Corrected import based on folder structure
 
 bot = BizBot()
 
 def chat_with_bizbot(query):
     return bot.answer(query)
 
-with gr.Blocks() as admin_ui:
+with gr.Blocks() as ui:
     gr.Markdown("## BizBot RAG Chatbot")
-    gr.Markdown("RAG-powered local chatbot using LLM + ChromaDB + fine-tuned BizBot")
+    gr.Markdown("RAG-powered local chatbot using fine-tuned BizBot")
 
-    with gr.Row():
-        query_input = gr.Textbox(label="Ask BizBot a question", placeholder="e.g. What are your support hours")
+    query_input = gr.Textbox(label="Ask a question", placeholder="e.g. What is your refund policy?")
+    output_box = gr.Textbox(label="Answer", lines=6)
 
-    with gr.Row():
-        clear_btn = gr.Button("Clear")
-        submit_btn = gr.Button("Submit")
+    submit_btn = gr.Button("Submit")
+    clear_btn = gr.Button("Clear")
 
-    output_text = gr.Textbox(label="Output", lines=8)
-
-    submit_btn.click(
-        fn=chat_with_bizbot,
-        inputs=[query_input],
-        outputs=output_text
-    )
-
-    clear_btn.click(fn=lambda: "", outputs=output_text)
+    submit_btn.click(fn=chat_with_bizbot, inputs=query_input, outputs=output_box)
+    clear_btn.click(fn=lambda: "", outputs=output_box)
 
 if __name__ == "__main__":
-    print("🚀 Launching Gradio UI...")
-    admin_ui.launch(server_port=7860)
+    print("🚀 Gradio UI running...")
+    ui.launch(server_port=7860)

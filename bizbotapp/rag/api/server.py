@@ -1,5 +1,3 @@
-# api/server.py
-
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from rag.bot import BizBot

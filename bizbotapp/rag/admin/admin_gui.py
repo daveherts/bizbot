@@ -20,14 +20,14 @@ collection = client.get_or_create_collection("company_docs")
 def run_ingestion():
     try:
         ingest_documents()
-        return "✅ Ingestion complete."
+        return "Ingestion complete."
     except Exception as e:
-        return f"❌ Ingestion failed: {str(e)}"
+        return f"Ingestion failed: {str(e)}"
 
 def list_docs():
     results = collection.get(include=["documents", "metadatas"])
     if not results["documents"]:
-        return "⚠️ No documents found."
+        return "No documents found."
 
     lines = []
     for i, doc in enumerate(results["documents"]):
@@ -38,13 +38,13 @@ def list_docs():
 def delete_docs():
     all_ids = collection.get()["ids"]
     if not all_ids:
-        return "⚠️ No documents to delete."
+        return "No documents to delete."
     collection.delete(ids=all_ids)
-    return "✅ All documents deleted."
+    return "All documents deleted."
 
 def handle_upload(file):
     if file is None:
-        return "❌ No file uploaded."
+        return "No file uploaded."
 
     filename = os.path.basename(file.name)
     dest_path = os.path.join(DOCUMENTS_DIR, filename)
@@ -53,9 +53,9 @@ def handle_upload(file):
     # Copy FAQ file if detected
     if "faq" in filename.lower() and filename.endswith(".txt"):
         shutil.copy(dest_path, FAQ_COPY_PATH)
-        return f"✅ Uploaded and copied to RAG FAQ: {filename}"
+        return f"Uploaded and copied to RAG FAQ: {filename}"
     else:
-        return f"✅ Uploaded: {filename}"
+        return f"Uploaded: {filename}"
 
 # UI
 with gr.Blocks(title="BizBot Admin Panel") as admin_ui:

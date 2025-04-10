@@ -1,6 +1,5 @@
 import gradio as gr
-from rag.bot import BizBot  # ✅ Corrected import based on folder structure
-
+from rag.bot import BizBot  
 bot = BizBot()
 
 def chat_with_bizbot(query):
@@ -20,5 +19,5 @@ with gr.Blocks() as ui:
     clear_btn.click(fn=lambda: "", outputs=output_box)
 
 if __name__ == "__main__":
-    print("🚀 Gradio UI running...")
+    print("Gradio UI running...")
     ui.launch(server_port=7860)

@@ -14,7 +14,7 @@ def ingest_documents():
         if not os.path.isfile(path):
             continue
 
-        print(f"📄 Ingesting {filename}")
+        print(f"Ingesting {filename}")
         chunks = load_document(path)
 
         collection.add(
@@ -23,7 +23,7 @@ def ingest_documents():
             ids=[f"{filename}_{i}" for i in range(len(chunks))]
         )
 
-    print("✅ Ingestion complete.")
+    print("Ingestion complete.")
 
 if __name__ == "__main__":
     ingest_documents()

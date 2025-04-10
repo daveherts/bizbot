@@ -6,10 +6,10 @@ client = PersistentClient(path=VECTOR_STORE_PATH)
 collection = client.get_or_create_collection("company_docs")
 
 def list_docs():
-    print("📄 Listing all documents in 'company_docs' collection:")
+    print("Listing all documents in 'company_docs' collection:")
     results = collection.get(include=["documents", "metadatas"])
     if not results["documents"]:
-        print("⚠️ No documents found.")
+        print("No documents found.")
         return
 
     for i, doc in enumerate(results["documents"]):
@@ -19,15 +19,15 @@ def list_docs():
 def clear_docs():
     all_ids = collection.get()["ids"]
     if not all_ids:
-        print("⚠️ No documents to delete.")
+        print("No documents to delete.")
         return
 
-    confirm = input("⚠️ Are you sure you want to delete all documents? (yes/no): ")
+    confirm = input("Are you sure you want to delete all documents? (yes/no): ")
     if confirm.lower() == "yes":
         collection.delete(ids=all_ids)
-        print("✅ All documents deleted.")
+        print("All documents deleted.")
     else:
-        print("❌ Deletion cancelled.")
+        print("Deletion cancelled.")
 
 if __name__ == "__main__":
     print("1. List documents")

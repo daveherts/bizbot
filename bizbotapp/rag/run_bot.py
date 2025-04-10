@@ -9,10 +9,10 @@ args = parser.parse_args()
 
 # Launch Gradio UI
 if args.mode == "gradio":
-    print("🚀 Launching Gradio UI...")
-    subprocess.run(["python3", "rag/gradio_ui.py"])  # ✅ Corrected path
+    print("Launching Gradio UI...")
+    subprocess.run(["python3", "rag/gradio_ui.py"])  
 
 # Launch FastAPI
 elif args.mode == "api":
-    print("🚀 Launching FastAPI server...")
+    print("Launching FastAPI server...")
     subprocess.run(["uvicorn", "rag.api.server:app", "--reload"])

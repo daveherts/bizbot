@@ -19,7 +19,7 @@ bot = BizBot()
 
 # --- Prompt Generator (no system_instructions arg now) ---
 def generate_rag_prompt(query: str) -> str:
-    return format_prompt(query, context="")  # context is handled in BizBot.answer
+    return format_prompt(query, context="")  
 
 # --- Accuracy Test ---
 def run_accuracy_test():
@@ -42,7 +42,7 @@ def run_accuracy_test():
             accuracy = evaluate_keywords(cleaned_output, expected)
 
             writer.writerow([user_q, expected, cleaned_output, latency, accuracy, "bizbot-llama1b-ft-rag"])
-            print(f"✅ {user_q} | ⏱ {latency}s | 🎯 {accuracy*100:.1f}%")
+            print(f"{user_q} | ⏱ {latency}s | 🎯 {accuracy*100:.1f}%")
 
 # --- Tone Test ---
 def run_tone_test():
@@ -67,4 +67,4 @@ def run_tone_test():
 if __name__ == "__main__":
     run_accuracy_test()
     run_tone_test()
-    print("✅ RAG benchmark complete.")
+    print("RAG benchmark complete.")

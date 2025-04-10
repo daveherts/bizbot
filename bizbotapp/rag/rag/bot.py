@@ -15,7 +15,7 @@ QNA_FILE_PATH = os.path.expanduser("~/bb/bizbotapp/rag/faq_pairs.txt")
 class BizBot:
     def __init__(self):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        print("🧠 Loading fine-tuned model (LoRA)...")
+        print("Loading fine-tuned model (LoRA)...")
 
         self.embedder = SentenceTransformer("all-MiniLM-L6-v2")
         self.tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL_PATH)
@@ -28,13 +28,13 @@ class BizBot:
         self.model = PeftModel.from_pretrained(base_model, ADAPTER_PATH)
         self.model.to(self.device)
         self.model.eval()
-        print("✅ Model loaded on:", self.device)
+        print("Model loaded on:", self.device)
 
         client = PersistentClient(path=CHROMA_DB_PATH)
         self.collection = client.get_or_create_collection("company_docs")
 
         self.qna_pairs = self.load_qna_pairs(QNA_FILE_PATH)
-        print(f"📚 Loaded {len(self.qna_pairs)} Q&A pairs from file.")
+        print(f"Loaded {len(self.qna_pairs)} Q&A pairs from file.")
 
     def load_qna_pairs(self, path):
         if not os.path.exists(path):
@@ -64,24 +64,24 @@ class BizBot:
             best_match = matches[0]
             for q, a in self.qna_pairs:
                 if q == best_match:
-                    print(f"✅ Fuzzy Q&A match found: '{best_match}' for input '{query}'")
+                    print(f"Fuzzy Q&A match found: '{best_match}' for input '{query}'")
                     return a
 
-        print(f"❌ No Q&A match (≥{int(threshold * 100)}%) for: '{query}'")
+        print(f"No Q&A match (≥{int(threshold * 100)}%) for: '{query}'")
         return None
 
     def answer(self, query: str) -> str:
         # Step 1: Check Q&A file
         match = self.check_exact_match(query)
         if match:
-            print("🎯 Answer from Q&A pairs.")
+            print("Answer from Q&A pairs.")
             return match
 
         # Step 2: RAG fallback
         print("🔍 Embedding query and retrieving documents...")
         results = self.collection.query(query_texts=[query], n_results=3)
         context = "\n".join(results["documents"][0]) if results["documents"] else ""
-        print("📄 Retrieved context:\n", context)
+        print("Retrieved context:\n", context)
 
         prompt = format_prompt(query, context)
         inputs = self.tokenizer(prompt, return_tensors="pt").to(self.device)

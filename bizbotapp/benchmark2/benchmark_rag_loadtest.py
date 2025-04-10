@@ -66,7 +66,7 @@ def run_concurrent_test(concurrent_users: int, output_file: str):
     test_pool = questions * ((concurrent_users + len(questions) - 1) // len(questions))
     test_pool = test_pool[:concurrent_users]
 
-    print(f"\n🚀 Starting load test with {concurrent_users} users...")
+    print(f"\n Starting load test with {concurrent_users} users...")
 
     # Start GPU sampling in a background thread
     gpu_thread = threading.Thread(target=sample_gpu_usage)
@@ -114,7 +114,7 @@ def run_concurrent_test(concurrent_users: int, output_file: str):
             peak_gpu_mem
         ])
 
-    print(f"✅ Results saved to {output_file} and {summary_path}")
+    print(f" Results saved to {output_file} and {summary_path}")
 
 if __name__ == "__main__":
     run_concurrent_test(10, os.path.join(OUTPUT_DIR, "loadtest_10_users.csv"))

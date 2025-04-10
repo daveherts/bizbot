@@ -2,7 +2,7 @@ from model_loader_ft import load_model
 from benchmetrics.accuracy import evaluate_keywords
 from benchmetrics.latency import time_inference
 from benchmetrics.tone_analysis import evaluate_tone
-from utils import extract_assistant_reply  # ✅ For cleaning
+from utils import extract_assistant_reply  
 
 MODELS_TO_TEST = ["fine-tuned-llama-1b"]
 
@@ -17,7 +17,7 @@ def run_single_eval(model_key):
     with open(QUESTIONS_PATH) as f:
         questions = json.load(f)
 
-    print(f"⚙️ Running benchmark for: {model_key}")
+    print(f"Running benchmark for: {model_key}")
     with open(RESULTS_CSV, "a", newline="") as file:
         writer = csv.writer(file)
         for q in questions:
@@ -34,7 +34,7 @@ def run_tone_eval(model_key):
     with open(TONE_SAMPLE_PATH) as f:
         pairs = json.load(f)
 
-    print(f"🎤 Evaluating tone for: {model_key}")
+    print(f"Evaluating tone for: {model_key}")
     with open(TONE_CSV, "a", newline="") as file:
         writer = csv.writer(file)
         for item in pairs:

@@ -22,7 +22,7 @@ def run_single_eval(model_key):
     with open(QUESTIONS_PATH) as f:
         questions = json.load(f)
 
-    print(f"⚙️ Running benchmark for: {model_key}")
+    print(f"Running benchmark for: {model_key}")
     with open(RESULTS_CSV, "a", newline="") as file:
         writer = csv.writer(file)
         for q in questions:
@@ -37,7 +37,7 @@ def run_tone_eval(model_key):
     with open(TONE_SAMPLE_PATH) as f:
         pairs = json.load(f)
 
-    print(f"🎤 Evaluating tone for: {model_key}")
+    print(f"Evaluating tone for: {model_key}")
     with open(TONE_CSV, "a", newline="") as file:
         writer = csv.writer(file)
         for item in pairs:

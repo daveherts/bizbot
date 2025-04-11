@@ -24,7 +24,7 @@ def load_model(model_key):
     model_id = MODEL_MAP[model_key]
     local_dir = os.path.join(HF_MODEL_DIR, model_key)
 
-    print(f"✅ Loading model: {model_id}")
+    print(f" Loading model: {model_id}")
     
     # Use Hugging Face's built-in cache mechanism
     tokenizer = AutoTokenizer.from_pretrained(model_id, cache_dir=local_dir)
